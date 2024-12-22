@@ -1,0 +1,13 @@
+{
+    "users": [
+        {"id": 1, "name": "Alice", "role": "Student"},
+        {"id": 2, "name": "Bob", "role": "Professor"}
+    ],
+    "courses": [
+        {"id": 1, "title": "Intro to AI", "description": "Learn the basics of AI."}
+    ],
+    "chapters": [
+        {"id": 1, "course_id": 1, "title": "AI History", "content": "AI started in the 1950s..."}
+    ]
+}
+
