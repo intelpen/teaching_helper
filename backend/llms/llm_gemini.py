@@ -1,7 +1,7 @@
-from vertexai import GenerativeModel
-# import vertexai
-# from llms.llm_protocol import LLMProtocol
-from llm_protocol import LLMProtocol
+from vertexai.generative_models import GenerativeModel
+import vertexai
+from backend.llms.llm_protocol import LLMProtocol
+
 
 import json
 import os
@@ -13,11 +13,14 @@ sys.path.insert(0, '.')
 class LLMGemini(LLMProtocol):
     def __init__(self, config=None):
         self.name = 'LLMGemini'
-        if config == None:
-            config = json.load(open('config.json', 'rt'))[self.name]
-        self.config = config
-        vertexai.init(
-            project=self.config["gcp_project_id"], location=config["location"])
+        # if config == None:
+        #     config = json.load(open('config.json', 'rt'))[self.name]
+        # self.config = config
+        # vertexai.init(project='clasificationfromdescription',
+        #           location='europe-west2')
+
+        # vertexai.init(
+        #     project=self.config["gcp_project_id"], location=config["location"])
         self.backend = GenerativeModel("gemini-1.5-pro")
 
     def process_request(self, message):

@@ -1,18 +1,18 @@
 {"general": {
     "llm": {
         "backend": "llmgemini",
-        "message_max_lenght": 4096
+        "message_max_lenght": 10000
         }
     }, 
 "LLMGemini":{
-    "gcp_project_id":"db-dev-o3zl-afbc-bdc",
-    "location":"europe-west3"
+    "gcp_project_id":"clasificationfromdescription",
+    "location":"europe-west2"
     },
 "LLMGeminiRag":{
     "chunker_name":"chunks",
-    "similarity_threshold": 0.6,
+    "similarity_threshold": 0.2,
     "top_k": 10,
-    "no_internal_source_prompt": "Your only answer should be exactly like this: \"There isn't any internal data which \ncorresponds with the given prompt. Please read the course material\". Nothing else before or after this \nplain answer.",
-    "internal_source_rules": "You are an assistant for users that needs answers from internal data. There are 2 main \nsections: 1. \"ORIGINAL USER PROMPT\" 2. \"CONTEXT FROM INTERNAL SOURCES\" 3. You need to respond to the \nORIGINAL USER PROMPT with the context from internal sources. Follow the \nbellow rules: 1. Answer only based on the internal sources. No data from outside of these sources are allowed in \ngiving a response. 2. Respond very directly to the user's prompt and do not mention in the response the actual \ncontext. 3. You will say \"Based on internal sources, ...\" and then you will give the answer directly without any other \ncontext."
+    "no_internal_source_prompt": "Your only answer should be exactly like this: Nu am gasit informatii in curs despre intrebarea ta",
+    "internal_source_rules": "Esti un asistent care raspunde in limba Romana la intrebarea din  \"ORIGINAL USER PROMPT\" folosind context din \"CONTEXT FROM INTERNAL SOURCES\". Raspunde folosind numai informatii din context. Raspunsul tau trebuie sa fie complet si sa contina cat mai mult din contextul intrebarii. Vei raspunde 'Folosind informatiile din curs, ' si apoi vei raspunde"
     }
 }

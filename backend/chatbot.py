@@ -1,4 +1,5 @@
-from llms.llm_rag import LLMRag
+from backend.llms.llm_rag import LLMRag
+from backend.llms.llm_gemini import LLMGemini
 
 
 def start_dialog(dialog_type, user_data):
@@ -10,5 +11,7 @@ def start_dialog(dialog_type, user_data):
 
 def respond_to_query(query, context):
     # Dummy response logic for now
-    llm_rag = LLMRag()
-    return f"You asked: {query}. Here's a response based on {context}."
+    backend_llm = LLMGemini()
+    llmrag = LLMRag(backend=backend_llm)
+    response = llmrag.process_request(query)
+    return f"{response.text}"

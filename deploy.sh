@@ -6,5 +6,5 @@
 #pip3 install -r requirements.txt
 
 # Run the app
-export PYTHONPATH=~/teaching_helper
+export PYTHONPATH=$PWD
 streamlit run frontend/main.py --server.port 8501 --server.address 0.0.0.0

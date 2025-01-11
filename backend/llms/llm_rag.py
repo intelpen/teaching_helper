@@ -1,24 +1,25 @@
-from helpers.highlighting import PDFHighlighter
-from llms.vector_store import VectorStoreWrapper
-from llms.llm_gemini import LLMGemini
-from llms.rag_protocol import RagProtocol
-from llms.llm_protocol import LLMProtocol
+from dotenv import load_dotenv  # nopep8
+import os  # nopep8
+import sys  # nopep8
+sys.path.insert(0, '.')  # nopep8
+sys.path.insert(0, '..')  # nopep8
+
+from backend.helpers.highlighting import PDFHighlighter
+from backend.llms.vector_store import VectorStoreWrapper
+from backend.llms.llm_gemini import LLMGemini
+from backend.llms.rag_protocol import RagProtocol
+from backend.llms.llm_protocol import LLMProtocol
 import json
-import os
-import sys
-
-from dotenv import load_dotenv
-
-print(os.getcwd())
-sys.path.insert(0, '.')
 
 
 class LLMRag(LLMProtocol, RagProtocol):
     def __init__(self, config=None, backend=None):
         load_dotenv()
         if config is None:
-            config = json.load(open('config.json', 'rt'))['LLMGemini']
+            config = json.load(
+                open('backend/config.json', 'rt'))['LLMGeminiRag']
         self.config = config
+        print(f'config {config} \n -------------------------------')
 
         self.name = 'LLMRag'
         if backend is None:
