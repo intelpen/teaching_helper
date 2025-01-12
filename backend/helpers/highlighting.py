@@ -5,7 +5,7 @@ from langchain_community.docstore.document import Document
 class PDFHighlighter:
     @staticmethod
     def highlight_text_from_file(original_file_path: str, pages_no_with_chunks: list[
-        tuple[int, str]]):
+            tuple[int, str]]):
         """
         Method that gets a file and a (page, chunk) tuple and returns a new file with the text highlighted
 

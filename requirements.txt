@@ -3,3 +3,14 @@ sqlalchemy
 pandas
 numpy
 openai
+streamlit
+sqlalchemy
+bcrypt
+chromadb
+langchain
+langchain-community
+langchain-huggingface
+pymupdf
+PDFHighlighter
+authlib
+email-validator
