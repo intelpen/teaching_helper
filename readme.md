@@ -1,3 +1,5 @@
+
+
 Folder Structure
 bash
 Copy code
@@ -96,3 +98,13 @@ Access the App:
 
 Open the external IP of your VM in a browser with port 8501.
 
+---------------
+Install packages
+
+pip3 install torch --index-url https://download.pytorch.org/whl/cpu --break-system-packages
+
+da la service user de gcp de la vm drepturi de vertex ai,
+apoi genereaza o cheie, upload in vm
+apoi  export GOOGLE_APPLICATION_CREDENTIALS="/home/adrian_balan/key.json"
+
+TODO : change authetification for vertex ai to use a user/token system
