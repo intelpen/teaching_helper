@@ -5,8 +5,9 @@
         }
     }, 
 "LLMGemini":{
-    "gcp_project_id":"clasificationfromdescription",
-    "location":"europe-west2"
+    "gcp_project_id":"__project_id__",
+    "location":"europe-west3",
+    "credentials":"sa_private_key.json"
     },
 "LLMGeminiRag":{
     "chunker_name":"chunks",

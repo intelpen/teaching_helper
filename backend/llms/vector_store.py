@@ -6,9 +6,8 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.docstore.document import Document
 from langchain_community.document_loaders import DirectoryLoader
 from langchain_community.document_loaders import PyPDFLoader
-from langchain_community.vectorstores import Chroma
-from langchain.embeddings import HuggingFaceEmbeddings
-
+from langchain_chroma import Chroma
+from langchain_huggingface import HuggingFaceEmbeddings
 
 class VectorStoreWrapper:
     """I include the chunker here, but it can be further splitted to a separate chunker

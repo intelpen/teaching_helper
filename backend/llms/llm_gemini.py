@@ -1,7 +1,8 @@
 from vertexai.generative_models import GenerativeModel
 import vertexai
 from backend.llms.llm_protocol import LLMProtocol
-
+from google.oauth2 import service_account
+from google.auth.transport.requests import Request
 
 import json
 import os
@@ -13,14 +14,17 @@ sys.path.insert(0, '.')
 class LLMGemini(LLMProtocol):
     def __init__(self, config=None):
         self.name = 'LLMGemini'
-        # if config == None:
-        #     config = json.load(open('config.json', 'rt'))[self.name]
-        # self.config = config
-        # vertexai.init(project='clasificationfromdescription',
-        #           location='europe-west2')
+        if config == None:
+            config = json.load(open('backend/config.json', 'rt'))[self.name]
+        self.config = config
 
-        # vertexai.init(
-        #     project=self.config["gcp_project_id"], location=config["location"])
+        credentials = service_account.Credentials.from_service_account_file(config["credentials"],
+            scopes=["https://www.googleapis.com/auth/cloud-platform"])
+        
+        vertexai.init(
+            project=self.config["gcp_project_id"],
+            location=config["location"],
+            credentials=credentials)
         self.backend = GenerativeModel("gemini-1.5-pro")
 
     def process_request(self, message):
