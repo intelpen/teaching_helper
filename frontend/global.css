@@ -1,0 +1,98 @@
+/* General App Styling */
+body {
+    font-family: 'Arial', sans-serif;
+}
+
+/* Sidebar Styling */
+.sidebar .element-container {
+    background-color: #f4f4f4;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3 {
+    color: #333;
+}
+
+/* Main Zone Styling */
+.stApp {
+    background-color: #ffffff;
+}
+
+.stApp header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.stApp h1, .stApp h2, .stApp h3 {
+    color: #333;
+}
+
+.container {
+    background-color: #f9f9f9;
+    padding: 20px;
+    margin-top: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Dialog Styling */
+.container input[type="text"] {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+/* Buttons */
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Fix button size and alignment */
+.css-1aumxhk button {
+    width: 120px; /* Fixed width to accommodate Course 10 */
+    height: 50px; /* Fixed height for all buttons */
+    white-space: nowrap; /* Prevent text wrapping */
+    overflow: hidden; /* Hide overflowing text */
+    text-overflow: ellipsis; /* Use ellipsis if text overflows */
+    margin: 5px; /* Add consistent spacing between buttons */
+    display: inline-flex; /* Ensure inline alignment */
+    justify-content: center; /* Center text horizontally */
+    align-items: center; /* Center text vertically */
+    border-radius: 8px; /* Optional: Rounded corners */
+    font-size: 14px; /* Ensure consistent font size */
+    line-height: normal; /* Prevent height growth due to line height */
+}
+
+/* Prevent buttons from expanding when selected */
+.css-1aumxhk button:focus {
+    outline: none; /* Remove focus outline */
+    box-shadow: none; /* Remove focus shadow */
+}
+
+/* Optional: Add hover and active styles */
+.css-1aumxhk button:hover {
+    background-color: #e8e8e8; /* Slight hover effect */
+}
+
+.css-1aumxhk button:active {
+    background-color: #4CAF50; /* Green background for active button */
+    color: white; /* White text for active button */
+    font-weight: bold;
+}
+

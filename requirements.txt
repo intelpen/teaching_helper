@@ -1,0 +1,14 @@
+streamlit
+sqlalchemy
+pandas
+numpy
+streamlit
+sqlalchemy
+bcrypt
+chromadb
+langchain
+langchain-community
+#langchain-huggingface
+pymupdf
+authlib
+email-validator

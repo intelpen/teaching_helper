@@ -1,0 +1,18 @@
+{"general": {
+    "llm": {
+        "backend": "llmgemini",
+        "message_max_lenght": 10000
+        }
+    }, 
+"LLMGemini":{
+    "gcp_project_id":"clasificationfromdescription",
+    "location":"europe-west2"
+    },
+"LLMGeminiRag":{
+    "chunker_name":"chunks",
+    "similarity_threshold": 0.2,
+    "top_k": 10,
+    "no_internal_source_prompt": "Your only answer should be exactly like this: Nu am gasit informatii in curs despre intrebarea ta",
+    "internal_source_rules": "Esti un asistent care raspunde in limba Romana la intrebarea din  \"ORIGINAL USER PROMPT\" folosind context din \"CONTEXT FROM INTERNAL SOURCES\". Raspunde folosind numai informatii din context. Raspunsul tau trebuie sa fie complet si sa contina cat mai mult din contextul intrebarii. Vei raspunde 'Folosind informatiile din curs, ' si apoi vei raspunde"
+    }
+}
