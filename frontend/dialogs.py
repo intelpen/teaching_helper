@@ -303,4 +303,3 @@ def render_dialog(pdf_file):
 # Mock Query Response
 def respond_to_query(query, dialog_type):
     return f"Response to '{query}' in context of '{dialog_type}'."
-
