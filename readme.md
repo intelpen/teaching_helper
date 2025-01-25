@@ -99,12 +99,32 @@ Access the App:
 Open the external IP of your VM in a browser with port 8501.
 
 ---------------
+Create Google Cloud Service account
+
+Install google-cloud-sdk https://cloud.google.com/sdk/docs/install
+
+gcloud auth login
+gcloud config set project clasificationfromdescription
+
+gcloud iam service-accounts create sa-teaching-helper \
+    --description "Service account dedicated to the external application teaching-helper to consume Vertex AI endpoint" \
+    --display-name "Vertex AI consumption for app teaching-helper"
+
+gcloud projects add-iam-policy-binding clasificationfromdescription \
+  --member 'serviceAccount:sa-teaching-helper@clasificationfromdescription.iam.gserviceaccount.com' \
+  --role 'roles/aiplatform.user'
+
+gcloud iam service-accounts keys create sa_private_key.json \
+    --iam-account sa-teaching-helper@clasificationfromdescription.iam.gserviceaccount.com
+
+
+---------------
 Install packages
 
-pip3 install torch --index-url https://download.pytorch.org/whl/cpu --break-system-packages
+VIRTUAL_ENV=__working_dir__
+python3.10 -m venv $VIRTUAL_ENV
+source $VIRTUAL_ENV/bin/activate
+pip install --upgrade pip
 
-da la service user de gcp de la vm drepturi de vertex ai,
-apoi genereaza o cheie, upload in vm
-apoi  export GOOGLE_APPLICATION_CREDENTIALS="/home/adrian_balan/key.json"
-
-TODO : change authetification for vertex ai to use a user/token system
+python3.10 -m pip install --pre torch --extra-index-url https://download.pytorch.org/whl/cu124
+python3.10 -m pip install -r requirements.txt

@@ -8,7 +8,14 @@ bcrypt
 chromadb
 langchain
 langchain-community
-#langchain-huggingface
+langchain-huggingface
+langchain-chroma
+google
+torch
 pymupdf
 authlib
 email-validator
+vertexai
+sentence-transformers
+watchdog
+reportlab
