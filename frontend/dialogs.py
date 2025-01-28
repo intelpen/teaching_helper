@@ -121,8 +121,8 @@ def generate_pdf(responses):
 def display_pdf(pdf_path):
     with open(pdf_path, "rb") as f:
         base64_pdf = base64.b64encode(f.read()).decode("utf-8")
-        pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="100%" height="700px"></iframe>'
-        st.markdown(pdf_display, unsafe_allow_html=True)
+    pdf_display = F'<embed src="data:application/pdf;base64,{base64_pdf}" width="700" height="1000" type="application/pdf">'
+    st.markdown(pdf_display, unsafe_allow_html=True)
 
 
 # Render survey dynamically (Questions 1 to 5)
@@ -250,7 +250,7 @@ def generate_pdf(responses):
 def display_pdf(pdf_path):
     with open(pdf_path, "rb") as f:
         base64_pdf = base64.b64encode(f.read()).decode("utf-8")
-        pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="100%" height="700px"></iframe>'
+    pdf_display = F'<embed src="data:application/pdf;base64,{base64_pdf}" width="700" height="1000" type="application/pdf">'
     st.markdown(pdf_display, unsafe_allow_html=True)
 
 
@@ -261,44 +261,47 @@ def display_pdf(pdf_path):
 
 
 def render_dialog(pdf_file):
-    #left, right = st.columns([2, 1])  # Adjust column layout
-    left, right = st.columns([0.4, 0.6])  # Adjust column widths to 40% and 60%
-    if st.session_state.get("survey_active", False):
-        st.title("Feedback Survey")
-        render_survey()
-    else:
-        # Left Zone: Display PDF or course content
-        with left:
-            if pdf_file:
-                st.subheader(f"Content for {pdf_file}")
-                try:
-                    with open(pdf_file, "rb") as pdf:
-                        pdf_data = pdf.read()
-                        st.download_button(
-                            label="Download PDF",
-                            data=pdf_data,
-                            file_name=pdf_file.split("/")[-1],
-                            mime="application/pdf",
-                        )
-                        st.markdown(
-                            f'<iframe src="data:application/pdf;base64,{base64.b64encode(pdf_data).decode()}" '
-                            f'width="100%" height="700px"></iframe>',
-                            unsafe_allow_html=True,
-                        )
-                except FileNotFoundError:
-                    st.error("PDF file not found. Please check the file path.")
-            else:
-                st.info("No course selected. Please select a course from the sidebar.")
+    left, right = st.columns([0.6, 0.4])  # Adjust column width to 60% / 40%
 
-        # Right Zone: Chat Interface
-        with right:
-            st.subheader("Chat Interface")
-            dialog_type = st.selectbox("Select Dialog Type", ["Learning", "Evaluation"], key="dialog_type")
-            user_input = st.text_input("Ask a question or start the dialog:", key="user_input")
+    if st.session_state['connected']:
+        if st.session_state.get("survey_active", False):
+            st.title("Feedback Survey")
+            render_survey()
+        else:
+            # Left Zone: Display PDF or course content
+            with left:
+                if pdf_file:
+                    st.subheader(f"Content for {pdf_file}")
+                    try:
+                        display_pdf(st.session_state["pdf_file"])
+                        # with open(pdf_file, "rb") as pdf:
+                        #     pdf_data = pdf.read()
+                        #     st.download_button(
+                        #         label="Download PDF",
+                        #         data=pdf_data,
+                        #         file_name=pdf_file.split("/")[-1],
+                        #         mime="application/pdf",
+                        #     )
+                        #     st.markdown(
+                        #         f'<iframe src="data:application/pdf;base64,{base64.b64encode(pdf_data).decode()}" '
+                        #         f'width="100%" height="700px"></iframe>',
+                        #         unsafe_allow_html=True,
+                        #     )
 
-            if user_input:
-                response = respond_to_query(user_input, dialog_type)
-                st.write(response)
+                    except FileNotFoundError:
+                        st.error("PDF file not found. Please check the file path.")
+                else:
+                    st.info("No course selected. Please select a course from the sidebar.")
+
+            # Right Zone: Chat Interface
+            with right:
+                st.subheader("Chat Interface")
+                dialog_type = st.selectbox("Select Dialog Type", ["Learning", "Evaluation"], key="dialog_type")
+                user_input = st.text_input("Ask a question or start the dialog:", key="user_input")
+
+                if user_input:
+                    response = respond_to_query(user_input, dialog_type)
+                    st.write(response)
 
 # Mock Query Response
 def respond_to_query(query, dialog_type):
