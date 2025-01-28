@@ -19,3 +19,4 @@ vertexai
 sentence-transformers
 watchdog
 reportlab
+streamlit-google-auth

@@ -82,5 +82,12 @@ def render_sidebar():
         if st.button("Begin Survey"):
             st.session_state["survey_active"] = True  # Activate survey mode
 
+        if st.session_state['connected']:
+            st.image(st.session_state['user_info'].get('picture'))
+            st.write('Hello, '+ st.session_state['user_info'].get('name'))
+            # st.write('Your email is '+ st.session_state['user_info'].get('email'))
+            if st.button('Log out'):
+                st.session_state["authenticator"].logout()
+
     # Return the selected PDF file path
     return pdf_file

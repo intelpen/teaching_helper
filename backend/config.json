@@ -4,6 +4,9 @@
         "message_max_lenght": 10000
         }
     }, 
+"GoogleAuth":{
+    "client_secret":"client_secret_auth_key.json"
+    },
 "LLMGemini":{
     "gcp_project_id":"clasificationfromdescription",
     "location":"europe-west3",
