@@ -1,130 +1,156 @@
+# Welcome to Teaching Helper!
 
-
-Folder Structure
-bash
-Copy code
-/app
-│
+## Folder Structure
+```
 ├── /backend
-│   ├── database.py       # Handles database schema and interactions
-│   ├── evaluation.py     # Logic for evaluation and grading
-│   ├── chatbot.py        # Chatbot interaction logic
-│   ├── utils.py          # Common utilities
-│   └── __init__.py       # Marks the folder as a package
+│ ├── database.py # Handles database schema and interactions
+│ ├── evaluation.py # Logic for evaluation and grading
+│ ├── chatbot.py # Chatbot interaction logic
+│ ├── utils.py # Common utilities
+│ └── __init__.py # Marks the folder as a package
 │
 ├── /frontend
-│   ├── main.py           # Entry point for Streamlit app
-│   ├── sidebar.py        # Components for the left sidebar
-│   ├── dialogs.py        # Main dialog zone logic
-│   ├── sandbox.py        # Sandbox logic for coding evaluation
-│   ├── evaluation_ui.py  # UI components for evaluation
-│   └── __init__.py       # Marks the folder as a package
+│ ├── main.py # Entry point for Streamlit app
+│ ├── sidebar.py # Components for the left sidebar
+│ ├── dialogs.py # Main dialog zone logic
+│ ├── sandbox.py # Sandbox logic for coding evaluation
+│ ├── evaluation_ui.py # UI components for evaluation
+│ └── __init__.py # Marks the folder as a package
 │
 ├── /static
-│   ├── styles.css        # Custom styles for the app
+│ ├── styles.css # Custom styles for the app
 │
 ├── /data
-│   └── example_data.json # Example or test data for development
+│ └── example_data.json # Example or test data for development
 │
-├── requirements.txt      # Python dependencies
-├── README.md             # Overview and instructions
-└── deploy.sh             # Script for deployment to Google Cloud VM
-Content of Key Files
-/backend/database.py
+├── requirements.txt # Python dependencies
+├── README.md # Overview and instructions
+└── deploy.sh # Script for deployment to Google Cloud VM
+```
+### Content of Key Files
+
+`/backend/database.py`
 Defines the database structure for students, professors, courses, and chapters. Manages CRUD operations.
 
-/backend/evaluation.py
+`/backend/evaluation.py`
 Contains logic to evaluate answers (text, code snippets, or true/false), calculate scores, and provide feedback.
 
-/backend/chatbot.py
+`/backend/chatbot.py`
 Handles chatbot interactions, including structured dialog flow for assisted learning and evaluation.
 
-/backend/utils.py
+`/backend/utils.py`
 Utility functions for formatting, logging, and handling errors.
 
-/frontend/main.py
+`/frontend/main.py`
 Sets up the Streamlit app layout with sidebar and main content areas.
 
-/frontend/sidebar.py
+`/frontend/sidebar.py`
 Implements the sidebar UI:
-
 Selection of chapters/units.
 Evaluation of selected chapters.
 User feedback surveys.
-/frontend/dialogs.py
-Handles the main dialog flow for user interaction:
 
+`/frontend/dialogs.py`
+Handles the main dialog flow for user interaction:
 Assisted learning: Displays content and prompts questions.
 Evaluation: Allows submission of answers and displays scores.
-/frontend/sandbox.py
+
+`/frontend/sandbox.py`
 Implements a coding sandbox for user input and automated evaluation.
 
-/frontend/evaluation_ui.py
+`/frontend/evaluation_ui.py`
 Displays results of evaluations and feedback on answers.
 
-/static/styles.css
+`/static/styles.css`
 Customizes the appearance of the Streamlit app.
 
-/data/example_data.json
+`/data/example_data.json`
 
+## Run the code locally
 
+```
+VIRTUAL_ENV=__working_dir__
+python3.10 -m venv $VIRTUAL_ENV
+source $VIRTUAL_ENV/bin/activate
+```
+You only need to do this once:
+`pip install --upgrade pip`
+`python3.10 -m pip install --pre torch --extra-index-url https://download.pytorch.org/whl/cu124`
+You only need to do this when you change the requirements.txt file:
+`python3.10 -m pip install -r requirements.txt`
 
+Run it:
+`sh deploy.sh`
 
-Deployment Instructions for Google Cloud VM
-Create a VM:
+## Docker
+### Local environment
 
-Use the Google Cloud Console to create a new VM instance.
-Select a machine type and region based on your needs.
-Ensure HTTP and HTTPS traffic is allowed.
-SSH into the VM:
+Build it (every time you change code):
+`docker build -t teaching-helper .`
 
-Connect to the VM using SSH from the Google Cloud Console or terminal.
-Install Python:
+Run it:
+```
+docker rm -f teaching-helper; docker run --name teaching-helper \
+-p 58080:8080 \
+-e redirect_uri="http://localhost:58080" \
+teaching-helper
+```
+If you want to debug the container while it's running:
+`docker exec -it teaching-helper bash`
 
-bash
-Copy code
-sudo apt-get update
-sudo apt-get install -y python3 python3-pip
-Upload Application:
+### Google Cloud Run
+Creating the depository, you only need to do this once for the project:
+`gcloud artifacts repositories create teaching-helper --location="europe-west3" --repository-format=Docker`
 
-Use SCP or upload files directly via the Google Cloud Console.
-Run the Deployment Script:
+Build it (every time you change code):
+`gcloud builds submit --tag "europe-west3-docker.pkg.dev/clasificationfromdescription/teaching-helper/teaching-helper"`
 
-bash
-Copy code
-chmod +x deploy.sh
-./deploy.sh
-Access the App:
+Run it:
+```
+gcloud run deploy "teaching-helper" \
+--memory=2Gi \
+--cpu=2 \
+--port=8080 \
+--image="europe-west3-docker.pkg.dev/clasificationfromdescription/teaching-helper/teaching-helper" \
+--allow-unauthenticated \
+--region="europe-west3" \
+--platform=managed \
+--project=clasificationfromdescription \
+--set-env-vars=GCP_PROJECT=clasificationfromdescription,GCP_REGION=europe-west3,redirect_uri='https://teaching-helper-612652291913.europe-west3.run.app' \
+--update-secrets=/app/secrets_sa/sa_private_key.json=sa_private_key:latest \
+--update-secrets=/app/secrets_ak/client_secret_auth_key.json=client_secret_auth_key:latest
+```
 
-Open the external IP of your VM in a browser with port 8501.
-
----------------
-Create Google Cloud Service account
+## Create a Google Cloud Service account
+**You only need to do this once for the project**:
 
 Install google-cloud-sdk https://cloud.google.com/sdk/docs/install
 
+```
 gcloud auth login
 gcloud config set project clasificationfromdescription
 
 gcloud iam service-accounts create sa-teaching-helper \
-    --description "Service account dedicated to the external application teaching-helper to consume Vertex AI endpoint" \
-    --display-name "Vertex AI consumption for app teaching-helper"
+--description "Service account dedicated to the external application teaching-helper to consume Vertex AI endpoint" \
+--display-name "Vertex AI consumption for app teaching-helper"
 
 gcloud projects add-iam-policy-binding clasificationfromdescription \
-  --member 'serviceAccount:sa-teaching-helper@clasificationfromdescription.iam.gserviceaccount.com' \
-  --role 'roles/aiplatform.user'
+--member 'serviceAccount:sa-teaching-helper@clasificationfromdescription.iam.gserviceaccount.com' \
+--role 'roles/aiplatform.user'
 
-gcloud iam service-accounts keys create sa_private_key.json \
-    --iam-account sa-teaching-helper@clasificationfromdescription.iam.gserviceaccount.com
+gcloud iam service-accounts keys create secrets_sa/sa_private_key.json \
+--iam-account sa-teaching-helper@clasificationfromdescription.iam.gserviceaccount.com
 
+gcloud secrets create sa_private_key --data-file=secrets_sa/sa_private_key.json
 
----------------
-Install packages
+# for the google_auth 
+gcloud secrets create client_secret_auth_key --data-file=secrets_ak/client_secret_auth_key.json
 
-VIRTUAL_ENV=__working_dir__
-python3.10 -m venv $VIRTUAL_ENV
-source $VIRTUAL_ENV/bin/activate
-pip install --upgrade pip
+#to add a version
+gcloud secrets versions add sa_private_key --data-file=secrets_sa/sa_private_key.json
 
-python3.10 -m pip install --pre torch --extra-index-url https://download.pytorch.org/whl/cu124
-python3.10 -m pip install -r requirements.txt
+#run this once for each cloud run container, allows it to read secrets
+gcloud projects add-iam-policy-binding clasificationfromdescription \
+--member 'serviceAccount:612652291913-compute@developer.gserviceaccount.com' \
+--role 'roles/secretmanager.secretAccessor'
+```

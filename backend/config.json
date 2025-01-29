@@ -5,12 +5,12 @@
         }
     }, 
 "GoogleAuth":{
-    "client_secret":"client_secret_auth_key.json"
+    "client_secret":"secrets_ak/client_secret_auth_key.json"
     },
 "LLMGemini":{
     "gcp_project_id":"clasificationfromdescription",
     "location":"europe-west3",
-    "credentials":"sa_private_key.json"
+    "credentials":"secrets_sa/sa_private_key.json"
     },
 "LLMGeminiRag":{
     "chunker_name":"chunks",

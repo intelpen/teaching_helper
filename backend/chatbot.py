@@ -1,5 +1,5 @@
-#from backend.llms.llm_rag import LLMRag
-#from backend.llms.llm_gemini import LLMGemini
+from backend.llms.llm_rag import LLMRag
+from backend.llms.llm_gemini import LLMGemini
 
 
 def start_dialog(dialog_type, user_data):
