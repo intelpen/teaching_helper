@@ -5,6 +5,7 @@ from frontend.dialogs import render_dialog
 from pathlib import Path
 from streamlit_google_auth import Authenticate
 import json
+import os
 
 
 def render_login():
@@ -63,7 +64,7 @@ def render_main_app():
             secret_credentials_path = config["client_secret"],
             cookie_name='teaching_helper',
             cookie_key='teaching_helper_key_secret',
-            redirect_uri = 'http://localhost:8501',
+            redirect_uri = os.getenv('redirect_uri') or 'http://localhost:8501',
         )
         st.session_state["authenticator"] = authenticator
 
