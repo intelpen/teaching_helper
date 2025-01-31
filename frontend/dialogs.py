@@ -1,5 +1,6 @@
 import streamlit as st
 from backend.chatbot import start_dialog, respond_to_query
+from streamlit_pdf_viewer import pdf_viewer
 
 # varianta
 #def render_dialog():
@@ -58,7 +59,7 @@ from backend.chatbot import start_dialog, respond_to_query
 #        st.subheader("PDF Viewer")
 #        if pdf_file:
 #            try:
-#                display_pdf(pdf_file)  # Updated function to serve PDF
+#                pdf_viewer(pdf_file)  # Updated function to serve PDF
 #            except FileNotFoundError:
 #                st.error(f"File {pdf_file} not found!")
 #        else:
@@ -76,7 +77,7 @@ from backend.chatbot import start_dialog, respond_to_query
 
 
 # Function to embed PDF in Streamlit
-#def display_pdf(pdf_file):
+#def pdf_viewer(pdf_file):
 #    with open(pdf_file, "rb") as f:
 #        base64_pdf = base64.b64encode(f.read()).decode("utf-8")
 #    pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="100%" height="700px"></iframe>'
@@ -117,16 +118,6 @@ def generate_pdf(responses):
     return pdf_path
 
 
-# Display the generated PDF in the app
-def display_pdf(pdf_path):
-    with open(pdf_path, "rb") as f:
-        base64_pdf = base64.b64encode(f.read()).decode("utf-8")
-    pdf_display = F'<embed src="data:application/pdf;base64,{base64_pdf}" width="700" height="1000" type="application/pdf">'
-    st.markdown(pdf_display, unsafe_allow_html=True)
-
-
-# Render survey dynamically (Questions 1 to 5)
-# Render survey dynamically (Questions 1 to 5)
 def render_survey():
     # Define the survey questions
     survey = [
@@ -220,7 +211,7 @@ def render_survey():
         # Display the completed PDF after submission
         if survey_state["submitted"] and st.session_state.get("survey_pdf_path"):
             st.subheader("Completed Survey")
-            display_pdf(st.session_state["survey_pdf_path"])
+            pdf_viewer(st.session_state["survey_pdf_path"])
 
 
 # Generate the PDF with survey responses
@@ -246,19 +237,6 @@ def generate_pdf(responses):
     return pdf_path
 
 
-# Display the generated PDF in the app
-def display_pdf(pdf_path):
-    with open(pdf_path, "rb") as f:
-        base64_pdf = base64.b64encode(f.read()).decode("utf-8")
-    pdf_display = F'<embed src="data:application/pdf;base64,{base64_pdf}" width="700" height="1000" type="application/pdf">'
-    st.markdown(pdf_display, unsafe_allow_html=True)
-
-
-
-
-
-
-
 
 def render_dialog(pdf_file):
     left, right = st.columns([0.6, 0.4])  # Adjust column width to 60% / 40%
@@ -273,7 +251,8 @@ def render_dialog(pdf_file):
                 if pdf_file:
                     st.subheader(f"Content for {pdf_file}")
                     try:
-                        display_pdf(st.session_state["pdf_file"])
+                        pdf_viewer(st.session_state["pdf_file"])
+                        # pdf_viewer(st.session_state["pdf_file"])
                         # with open(pdf_file, "rb") as pdf:
                         #     pdf_data = pdf.read()
                         #     st.download_button(

@@ -20,3 +20,4 @@ sentence-transformers
 watchdog
 reportlab
 streamlit-google-auth
+streamlit-pdf-viewer

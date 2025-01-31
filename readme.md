@@ -99,6 +99,10 @@ If you want to debug the container while it's running:
 `docker exec -it teaching-helper bash`
 
 ### Google Cloud Run
+You need to login once with your Google account and activate the project:
+`gcloud auth login`
+`gcloud config set project clasificationfromdescription`
+
 Creating the depository, you only need to do this once for the project:
 `gcloud artifacts repositories create teaching-helper --location="europe-west3" --repository-format=Docker`
 
@@ -108,7 +112,7 @@ Build it (every time you change code):
 Run it:
 ```
 gcloud run deploy "teaching-helper" \
---memory=2Gi \
+--memory=3Gi \
 --cpu=2 \
 --port=8080 \
 --image="europe-west3-docker.pkg.dev/clasificationfromdescription/teaching-helper/teaching-helper" \
