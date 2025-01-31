@@ -1,3 +1,4 @@
+torch -f https://download.pytorch.org/whl/cpu
 streamlit
 sqlalchemy
 pandas
@@ -11,7 +12,6 @@ langchain-community
 langchain-huggingface
 langchain-chroma
 google
-torch
 pymupdf
 authlib
 email-validator
