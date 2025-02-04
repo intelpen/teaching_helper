@@ -241,7 +241,7 @@ def generate_pdf(responses):
 def render_dialog(pdf_file):
     left, right = st.columns([0.6, 0.4])  # Adjust column width to 60% / 40%
 
-    if st.session_state['connected']:
+    if st.session_state.get("connected", False):
         if st.session_state.get("survey_active", False):
             st.title("Feedback Survey")
             render_survey()

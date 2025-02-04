@@ -7,6 +7,9 @@ ENV PYTHONUNBUFFERED 1
 RUN python -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
+RUN pip install --no-cache-dir --pre torch \
+    --index-url https://download.pytorch.org/whl/cpu
+
 COPY requirements.txt requirements.txt ./
 RUN pip install -r requirements.txt
 

@@ -3,7 +3,6 @@ sqlalchemy
 pandas
 numpy
 streamlit
-sqlalchemy
 bcrypt
 chromadb
 langchain
@@ -11,7 +10,6 @@ langchain-community
 langchain-huggingface
 langchain-chroma
 google
-torch
 pymupdf
 authlib
 email-validator
@@ -19,5 +17,5 @@ vertexai
 sentence-transformers
 watchdog
 reportlab
-streamlit-google-auth
 streamlit-pdf-viewer
+google_auth_oauthlib
