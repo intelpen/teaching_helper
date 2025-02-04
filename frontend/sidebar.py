@@ -49,8 +49,6 @@ import streamlit as st
 #    return f"Response to '{query}' in context of '{dialog_type}'."
 
 
-import streamlit as st
-
 def render_sidebar():
     st.title("Virtual Assistant")
 
@@ -82,12 +80,13 @@ def render_sidebar():
         if st.button("Begin Survey"):
             st.session_state["survey_active"] = True  # Activate survey mode
 
-        if st.session_state['connected']:
-            st.image(st.session_state['user_info'].get('picture'))
+        if st.session_state.get("connected", False):
+            picture_url = st.session_state['user_info'].get('picture')
+            if picture_url:
+                st.image(picture_url)  # Explicitly check image loading
             st.write('Hello, '+ st.session_state['user_info'].get('name'))
             # st.write('Your email is '+ st.session_state['user_info'].get('email'))
             if st.button('Log out'):
-                st.session_state["authenticator"].logout()
-
-    # Return the selected PDF file path
+                st.session_state.clear()  # Clear all session state data
+                st.rerun()   # Rerun the app to reflect the logout state    # Return the selected PDF file path
     return pdf_file

@@ -7,13 +7,9 @@ ENV PYTHONUNBUFFERED 1
 RUN python -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
-#daca vrei sa pui gcloud 
-#RUN apt-get update
-#RUN apt-get install apt-transport-https ca-certificates gnupg curl
-#RUN echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg && apt-get update -y && apt-get install google-cloud-cli -y   
-#asta trebuie ca sa puna torch cpu
-RUN pip install --no-cache-dir torch==2.1.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
-RUN pip3 install --no-deps sentence-transformers
+RUN pip install --no-cache-dir --pre torch \
+    --index-url https://download.pytorch.org/whl/cpu
+
 COPY requirements.txt requirements.txt ./
 RUN pip install -r requirements.txt
 

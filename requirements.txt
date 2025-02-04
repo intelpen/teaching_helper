@@ -1,10 +1,8 @@
-torch -f https://download.pytorch.org/whl/cpu
 streamlit
 sqlalchemy
 pandas
 numpy
 streamlit
-sqlalchemy
 bcrypt
 chromadb
 langchain
@@ -19,4 +17,5 @@ vertexai
 sentence-transformers
 watchdog
 reportlab
-streamlit-google-auth
+streamlit-pdf-viewer
+google_auth_oauthlib
