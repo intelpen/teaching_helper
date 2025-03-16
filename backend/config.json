@@ -13,10 +13,10 @@
     "credentials":"secrets_sa/sa_private_key.json"
     },
 "LLMGeminiRag":{
-    "chunker_name":"chunks",
+    "chunker_name":"pages",
     "similarity_threshold": 0.2,
     "top_k": 10,
     "no_internal_source_prompt": "Your only answer should be exactly like this: Nu am gasit informatii in curs despre intrebarea ta",
-    "internal_source_rules": "Esti un asistent care raspunde in limba Romana la intrebarea din  \"ORIGINAL USER PROMPT\" folosind context din \"CONTEXT FROM INTERNAL SOURCES\". Raspunde folosind numai informatii din context. Raspunsul tau trebuie sa fie complet si sa contina cat mai mult din contextul intrebarii. Vei raspunde 'Folosind informatiile din curs, ' si apoi vei raspunde"
+    "internal_source_rules": "Esti un asistent care raspunde in limba Romana la intrebarea din  \"ORIGINAL USER PROMPT\" folosind context din \"CONTEXT FROM INTERNAL SOURCES\". Raspunsul tau trebuie cat mai concis si mai scurt (poate sa fie chiar doar o instructiune SQL) si sa includa(daca e posibil) text din CONTEXT.  Vei raspunde 'Folosind informatiile din curs, ' si apoi adauga raspunsul."
     }
 }
