@@ -14,4 +14,4 @@ def respond_to_query(query, context):
     backend_llm = LLMGemini()
     llmrag = LLMRag(backend=backend_llm)
     response = llmrag.process_request(query)
-    return f"{response.text}"
+    return f"{response['text']}"

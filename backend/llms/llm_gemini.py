@@ -19,17 +19,18 @@ class LLMGemini(LLMProtocol):
         self.config = config
 
         credentials = service_account.Credentials.from_service_account_file(config["credentials"],
-            scopes=["https://www.googleapis.com/auth/cloud-platform"])
-        
+                                                                            scopes=["https://www.googleapis.com/auth/cloud-platform"])
+
         vertexai.init(
             project=self.config["gcp_project_id"],
             location=config["location"],
             credentials=credentials)
-        self.backend = GenerativeModel("gemini-1.5-pro")
+        self.backend = GenerativeModel("gemini-1.5-flash-001")
 
     def process_request(self, message):
 
-        response = self.backend.generate_content(message)
+        response = {}
+        response['text'] = self.backend.generate_content(message).text
 
         return response
 
