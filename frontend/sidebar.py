@@ -57,6 +57,7 @@ def render_sidebar():
         st.selectbox("Select Chapter/Unit", ["Introduction", "Advanced Topics"], key="chapter_select")
         st.write("Make a choice")
 
+        # TODO: Align course buttons
         # Arrange buttons in rows of 3 for 12 files
         pdf_file = None  # Placeholder for the selected PDF file
         cols = st.columns(3)  # 3 buttons per row
