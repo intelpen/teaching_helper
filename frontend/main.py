@@ -105,7 +105,11 @@ def render_main_app():
                     </button>
                 </a>
             </div>
+            <div style="display: flex; justify-content: center;">
+                To get access please send an email with the desired role (instructor/student) and affiliafion:
+            </div>
             ''', unsafe_allow_html=True)
+            st.columns(3)[1].image('frontend/email.png', width=170)
             return
 
     st.sidebar.title("App Navigation")
