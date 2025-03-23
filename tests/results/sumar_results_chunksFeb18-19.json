@@ -1,0 +1,22 @@
+[
+  [
+    "ragas_results_gemini-1.0-pro-001_chunks_2025-02-18 22:38:46.csv",
+    "{'context_precision': 0.1840, 'context_recall': 0.5675, 'answer_relevancy': 0.8147, 'faithfulness': 0.4548, 'bleu_score': 0.1247, 'rouge_score': 0.2810, 'factual_correctness': 0.5362}"
+  ],
+  [
+    "ragas_results_gemini-1.5-flash-001_chunks_2025-02-18 23:02:29.csv",
+    "{'context_precision': 0.1882, 'context_recall': 0.5190, 'answer_relevancy': 0.7957, 'faithfulness': 0.5273, 'bleu_score': 0.2003, 'rouge_score': 0.3713, 'factual_correctness': 0.5349}"
+  ],
+  [
+    "ragas_results_gemini-1.5-pro-001_chunks_2025-02-18 23:28:23.csv",
+    "{'context_precision': 0.1854, 'context_recall': 0.5380, 'answer_relevancy': 0.7129, 'faithfulness': 0.5367, 'bleu_score': 0.1928, 'rouge_score': 0.4191, 'factual_correctness': 0.4775}"
+  ],
+  [
+    "ragas_results_gemini-2.0-flash-001_chunks_2025-02-18 23:52:02.csv",
+    "{'context_precision': 0.1873, 'context_recall': 0.5696, 'answer_relevancy': 0.6130, 'faithfulness': 0.6835, 'bleu_score': 0.1902, 'rouge_score': 0.3570, 'factual_correctness': 0.4269}"
+  ],
+  [
+    "ragas_results_gemini-2.0-pro-exp-02-05_chunks_2025-02-19 00:17:12.csv",
+    "{'context_precision': 0.1836, 'context_recall': 0.5570, 'answer_relevancy': 0.7012, 'faithfulness': 0.7038, 'bleu_score': 0.1580, 'rouge_score': 0.3047, 'factual_correctness': 0.4621}"
+  ]
+]

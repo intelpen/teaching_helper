@@ -107,16 +107,6 @@ class RagChroma(RagProtocol):
         elif self.config['chunker_name'] == "chunks":
             return self.augment_prompt_with_chunks(original_user_prompt)
 
-    def process_request(self, message):
-        # system_prompt = self.config['system_prompt']
-        # Augment the prompt
-        aug_prompt, context, sources = self.augment_prompt(message)
-        response = self.backend.process_request(aug_prompt)
-        response.context = context
-        response.sources = sources
-        print(f"text: {response.text}")
-        print(f"context: {response.context}")
-        return response
 
     def retrieve_docs(self, message):
         raise NotImplementedError

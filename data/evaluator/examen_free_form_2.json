@@ -1,0 +1,123 @@
+[
+    {
+      "question_id": "FA.1",
+      "question": "Explică diferența dintre nivelul conceptual și cel de vizualizare într-o bază de date.",
+      "reference_answer": "Nivelul conceptual descrie structura logică a bazei de date și relațiile dintre date, în timp ce nivelul de vizualizare corespunde modului în care utilizatorii finali văd datele.",
+      "sections_used": [
+        {
+          "section_id": "c1_abstractizare_nivele",
+          "from_pdf_file": "C1-BD_2025.pdf",
+          "section_text": "Nivelul conceptual este nivelul de mijloc al abstractizării [...] Nivelul de vizualizare este cel mai înalt nivel [...] utilizatorii finali folosesc datele fără să știe detalii tehnice."
+        }
+      ]
+    },
+    {
+      "question_id": "FA.2",
+      "question": "Scrie comanda SQL pentru a crea o tabelă STUDENT cu atributele ID (cheie primară), NUME și EMAIL (unic).",
+      "reference_answer": "CREATE TABLE STUDENT (ID INT PRIMARY KEY, NUME VARCHAR(50), EMAIL VARCHAR(50) UNIQUE);",
+      "sections_used": [
+        {
+          "section_id": "c2_sql_create_table",
+          "from_pdf_file": "C2-BD_2025.pdf",
+          "section_text": "CREATE TABLE Student ( ID INT PRIMARY KEY, Nume VARCHAR(50), Email VARCHAR(50) );"
+        }
+      ]
+    },
+    {
+      "question_id": "FA.3",
+      "question": "Care este diferența dintre clauza WHERE și clauza HAVING în SQL?",
+      "reference_answer": "Clauza WHERE filtrează rândurile înainte de grupare, iar HAVING filtrează grupurile rezultate după GROUP BY.",
+      "sections_used": [
+        {
+          "section_id": "c3_where_having",
+          "from_pdf_file": "C3-BD_2025.pdf",
+          "section_text": "Clauza WHERE filtrează înainte de grupare [...] Clauza HAVING se aplică asupra rezultatelor agregate."
+        }
+      ]
+    },
+    {
+      "question_id": "FA.4",
+      "question": "Scrie o comandă SQL care listează angajații cu salariu între 1000 și 3000.",
+      "reference_answer": "SELECT * FROM EMP WHERE sal BETWEEN 1000 AND 3000;",
+      "sections_used": [
+        {
+          "section_id": "c4_where_between",
+          "from_pdf_file": "C4-BD_2025.pdf",
+          "section_text": "SELECT * FROM EMP WHERE sal BETWEEN 1000 și 3000;"
+        }
+      ]
+    },
+    {
+      "question_id": "FA.5",
+      "question": "Cum este tratată valoarea NULL de către funcțiile agregate SQL?",
+      "reference_answer": "Funcțiile agregate precum AVG, SUM, COUNT ignoră valorile NULL, cu excepția COUNT(*), care le include.",
+      "sections_used": [
+        {
+          "section_id": "c5_agregate_null",
+          "from_pdf_file": "C5-BD_2025.pdf",
+          "section_text": "Toate funcțiile de grup ignoră valorile nule [...] COUNT(*) include toate rândurile, inclusiv cele cu valori nule."
+        }
+      ]
+    },
+    {
+      "question_id": "FA.6",
+      "question": "Scrie o interogare SQL care afișează numele și salariul angajaților care au același job ca angajatul cu empno 7369.",
+      "reference_answer": "SELECT ename, sal FROM emp WHERE job = (SELECT job FROM emp WHERE empno = 7369);",
+      "sections_used": [
+        {
+          "section_id": "c6_subquery_example",
+          "from_pdf_file": "C6-BD_2025.pdf",
+          "section_text": "SELECT ename, job FROM EMP WHERE job = (SELECT job FROM EMP WHERE empno = 7369);"
+        }
+      ]
+    },
+    {
+      "question_id": "FA.7",
+      "question": "Scrie comanda SQL pentru a șterge toți angajații din departamentele 10 și 20.",
+      "reference_answer": "DELETE FROM emp WHERE deptno IN (10, 20);",
+      "sections_used": [
+        {
+          "section_id": "c7_delete_multiple",
+          "from_pdf_file": "C7-BD_2025.pdf",
+          "section_text": "DELETE FROM emp WHERE deptno IN (10, 20);"
+        }
+      ]
+    },
+    {
+      "question_id": "FA.8",
+      "question": "Ce înseamnă o constrângere FOREIGN KEY și cum se definește?",
+      "reference_answer": "O constrângere FOREIGN KEY asigură integritatea referențială între două tabele. Exemplu: FOREIGN KEY(deptno) REFERENCES dept(deptno);",
+      "sections_used": [
+        {
+          "section_id": "c8_foreign_key",
+          "from_pdf_file": "C8-BD_2025.pdf",
+          "section_text": "Constrângerea FOREIGN KEY [...] stabilește o relație între o cheie primară și o coloană din altă tabelă."
+        }
+      ]
+    },
+    {
+      "question_id": "FA.9",
+      "question": "Scrie o comandă SQL pentru a crea o vedere (view) care afișează angajații din departamentul 30.",
+      "reference_answer": "CREATE VIEW emp30 AS SELECT * FROM emp WHERE deptno = 30;",
+      "sections_used": [
+        {
+          "section_id": "c9_view_emp30",
+          "from_pdf_file": "C9-BD_2025.pdf",
+          "section_text": "CREATE VIEW emp30 AS SELECT empno, ename, job, sal FROM emp WHERE deptno = 30;"
+        }
+      ]
+    },
+    {
+      "question_id": "FA.10",
+      "question": "Ce este normalizarea și care este scopul său principal?",
+      "reference_answer": "Normalizarea este procesul de organizare a datelor pentru a elimina redundanța și a asigura consistența bazei de date.",
+      "sections_used": [
+        {
+          "section_id": "c10_normalizare_def",
+          "from_pdf_file": "C10-BD_2025.pdf",
+          "section_text": "Normalizarea este procesul de organizare a datelor într-o bază de date pentru a minimiza redundanța și dependențele nedorite."
+        }
+      ]
+    }
+  ]
+  

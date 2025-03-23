@@ -1,0 +1,62 @@
+{
+    "q1": {
+        "query": "Ce este SQL?",
+        "expected_response": "SQL este un limbaj de interogare a bazelor de date."
+    },
+    "q2": {
+        "query": "Care este sintaxa de bază a unei interogări SELECT?",
+        "expected_response": "SELECT [DISTINCT] lista_de_expresii FROM nume_tabela WHERE conditie_linie ORDER BY criterii_sortare_rezultat;"
+    },
+    "q3": {
+        "query": "Ce face clauza WHERE într-o interogare SQL?",
+        "expected_response": "Clauza WHERE restricționează rândurile returnate la cele care îndeplinesc condiția specificată."
+    },
+    "q4": {
+        "query": "Care este efectul utilizării DISTINCT într-o interogare?",
+        "expected_response": "DISTINCT elimină rândurile duplicat din rezultatul interogării."
+    },
+    "q5": {
+        "query": "Ce face clauza ORDER BY?",
+        "expected_response": "Clauza ORDER BY sortează rezultatele în funcție de coloanele specificate."
+    },
+    "q6": {
+        "query": "Ce este o funcție în SQL?",
+        "expected_response": "Funcțiile sunt utilizate pentru a realiza calcule asupra datelor, a modifica date și a manipula grupuri de înregistrări."
+    },
+    "q7": {
+        "query": "Ce tipuri de funcții există în SQL?",
+        "expected_response": "Există funcții pentru o singură înregistrare și funcții pentru mai multe înregistrări (funcții de grup)."
+    },
+    "q8": {
+        "query": "Care sunt principalele funcții pentru șiruri de caractere?",
+        "expected_response": "LOWER, UPPER, INITCAP, CONCAT, SUBSTR, LENGTH, INSTR, REPLACE."
+    },
+    "q9": {
+        "query": "Ce face funcția LENGTH?",
+        "expected_response": "Funcția LENGTH returnează numărul de caractere dintr-un șir de caractere."
+    },
+    "q10": {
+        "query": "Cum se utilizează funcția CONCAT?",
+        "expected_response": "Funcția CONCAT concatenează două sau mai multe șiruri de caractere într-unul singur."
+    },
+    "q11": {
+        "query": "Ce este o subinterogare?",
+        "expected_response": "O subinterogare este o instrucțiune SELECT inclusă într-o altă instrucțiune SELECT."
+    },
+    "q12": {
+        "query": "În ce clauze poate fi plasată o subinterogare?",
+        "expected_response": "Subinterogările pot fi plasate în clauzele WHERE, HAVING și FROM."
+    },
+    "q13": {
+        "query": "Ce este clauza GROUP BY?",
+        "expected_response": "Clauza GROUP BY permite gruparea rezultatelor pe baza unei sau mai multor coloane."
+    },
+    "q14": {
+        "query": "Cum funcționează clauza HAVING?",
+        "expected_response": "Clauza HAVING filtrează grupurile de date după criterii specifice."
+    },
+    "q15": {
+        "query": "Care sunt principalele funcții de grup?",
+        "expected_response": "AVG, COUNT, MAX, MIN, STDDEV, SUM, VARIANCE."
+    }
+}
