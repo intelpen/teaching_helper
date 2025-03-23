@@ -1,0 +1,127 @@
+[
+  {
+    "question_id": "F.1",
+    "question": "Ce sunt secvențele în Oracle și de ce se folosesc?",
+    "reference_answer": "De ce folosim secventele?\n➢Aplicaţiile au în general nevoie în cadrul tabelelor de a conţine unele numere de identificare unice per tabelă cum este şi cazul cheilor primare.\n➢Acestea pot fi calculate de către aplicaţie direct folosind anumiţi algoritmi în funcţie de înregistrările deja existente şi apoi pot fi introduse în baza de date odată cu celelalte date.",
+    "sections_used": [
+      {
+        "section_id": "sec_F1_01",
+        "from_pdf_file": "C10-BD_2025.pdf",
+        "section_text": "De ce folosim secventele?\n➢Aplicaţiile au în general nevoie în cadrul tabelelor de a conţine unele numere de identificare unice per tabelă cum este şi cazul cheilor primare.\n➢Acestea pot fi calculate de către aplicaţie direct folosind anumiţi algoritmi în funcţie de înregistrările deja existente şi apoi pot fi introduse în baza de date odată cu celelalte date."
+      }
+    ]
+  },
+  {
+    "question_id": "F.2",
+    "question": "Explicați sintaxa creării unei secvențe în Oracle.",
+    "reference_answer": "O secvenţă poate fi creată utilizând următoarea sintaxa SQL:\n\nCREATE SEQUENCE nume_secventa\n   [INCREMENT BY n]\n   [START WITH n]\n   [{MAXVALUE n| NOMAXVALUE}]\n   [{MINVALUE n| NOMINVALUE}]\n   [{CYCLE | NOCYCLE}]\n   [{CACHE |NOCACHE}];",
+    "sections_used": [
+      {
+        "section_id": "sec_F2_01",
+        "from_pdf_file": "C10-BD_2025.pdf",
+        "section_text": "O secvenţă poate fi creată utilizând următoarea sintaxa SQL:\n\nCREATE SEQUENCE nume_secventa\n   [INCREMENT BY n]\n   [START WITH n]\n   [{MAXVALUE n| NOMAXVALUE}]\n   [{MINVALUE n| NOMINVALUE}]\n   [{CYCLE | NOCYCLE}]\n   [{CACHE |NOCACHE}];"
+      }
+    ]
+  },
+  {
+    "question_id": "F.3",
+    "question": "Scrieți o interogare SQL pentru a obține angajații cu salarii între 1000 și 3000.",
+    "reference_answer": "SELECT * FROM EMP WHERE sal BETWEEN 1000 AND 3000;",
+    "sections_used": [
+      {
+        "section_id": "sec_F3_01",
+        "from_pdf_file": "C3-BD_2025.pdf",
+        "section_text": "Exemplu: Listează toţi angajaţii care au salariul între 1000 şi 3000.\n\nSELECT * FROM EMP WHERE sal BETWEEN 1000 AND 3000;"
+      }
+    ]
+  },
+  {
+    "question_id": "F.4",
+    "question": "Explicați rolul funcției ROUND în interogările SQL, menționând ce se întâmplă când al doilea parametru este negativ.",
+    "reference_answer": "ROUND(a, b) - rotunjeşte valoarea lui a la un număr de cifre precizat prin parametrul b. Dacă al doilea parametru este un număr negativ, rotunjirea se face la stânga punctului zecimal; primele |b| cifre din stânga punctului zecimal vor deveni 0.",
+    "sections_used": [
+      {
+        "section_id": "sec_F4_01",
+        "from_pdf_file": "C4-BD_2025.pdf",
+        "section_text": "ROUND(a, b) - rotunjeşte valoarea lui a la un număr de cifre precizat prin parametrul b.\nDacă al doilea parametru este un număr pozitiv, atunci se vor păstra din a primele b zecimale, ultima dintre aceste cifre fiind rotunjită, în funcţie de următoarea zecimală.\nAl doilea argument poate fi o valoare negativă, rotunjirea făcându-se la stânga punctului zecimal.\nPrimele |b| cifre din stânga punctului zecimal vor deveni 0."
+      }
+    ]
+  },
+  {
+    "question_id": "F.5",
+    "question": "Ce reprezintă clauza GROUP BY în SQL și cum se utilizează pentru agregare?",
+    "reference_answer": "Clauza GROUP BY se folosește pentru a grupa rândurile unei tabele în funcție de valori comune și pentru a aplica funcții de agregare pe fiecare grup. Exemplu: SELECT deptno, AVG(sal) FROM EMP GROUP BY deptno;",
+    "sections_used": [
+      {
+        "section_id": "sec_F5_01",
+        "from_pdf_file": "C5-BD_2025.pdf",
+        "section_text": "4.3.1. Clauza GROUP BY\n\n➢ Pentru a putea împărţi tabela în grupuri mai mici se foloseşte clauza GROUP BY.\n➢ Folosirea acesteia returnează informaţii sumare despre fiecare grup.\n\nExemplul 8 - Salariul mediu pe fiecare department:\n\nSELECT deptno, AVG(sal) FROM EMP GROUP BY deptno;"
+      }
+    ]
+  },
+  {
+    "question_id": "F.6",
+    "question": "Scrieți o interogare SQL care utilizează o subinterogare single-row pentru a obține numele angajaților care au salariul mai mare decât angajatul cu ID-ul 7698.",
+    "reference_answer": "SELECT ename FROM EMP WHERE sal > (SELECT sal FROM EMP WHERE empno = 7698);",
+    "sections_used": [
+      {
+        "section_id": "sec_F6_01",
+        "from_pdf_file": "C6-BD_2025.pdf",
+        "section_text": "6.1. SINGLE ROW SUBQUERIES\n\nSELECT ename\nFROM EMP\nWHERE sal  >\n   ( SELECT sal\n     FROM EMP\n     WHERE empno = 7698 );"
+      }
+    ]
+  },
+  {
+    "question_id": "F.7",
+    "question": "Descrieți conceptele de cheie primară și cheie străină în modelul relațional.",
+    "reference_answer": "Modelul relațional utilizează chei primare pentru a identifica unic fiecare înregistrare și chei străine pentru a defini relațiile între tabele, asigurând astfel integritatea datelor.",
+    "sections_used": [
+      {
+        "section_id": "sec_F7_01",
+        "from_pdf_file": "C13-BD_2025.pdf",
+        "section_text": "Caracteristici principale ale modelului relațional:\n- Datele sunt organizate în tabele bidimensionale.\n- Utilizarea cheilor primare pentru a identifica unic fiecare înregistrare.\n- Cheile străine definesc relațiile între tabele."
+      }
+    ]
+  },
+  {
+    "question_id": "F.8",
+    "question": "Explicați diferențele dintre bazele de date ierarhice și cele relaționale, menționând un avantaj al modelului relațional.",
+    "reference_answer": "Bazele de date ierarhice organizează datele într-o structură de tip arbore, unde fiecare înregistrare are un singur părinte, în timp ce bazele de date relaționale organizează datele în tabele interconectate. Un avantaj al modelului relațional este flexibilitatea în interogare datorită limbajului SQL standardizat.",
+    "sections_used": [
+      {
+        "section_id": "sec_F8_01",
+        "from_pdf_file": "C12-BD_2025.pdf",
+        "section_text": "2.1. Baze de date ierarhice\n\nDefiniție: Bazele de date ierarhice organizează datele într-o structură de tip arbore, unde fiecare înregistrare are un singur părinte și poate avea mai mulți copii."
+      },
+      {
+        "section_id": "sec_F8_02",
+        "from_pdf_file": "C13-BD_2025.pdf",
+        "section_text": "Caracteristici principale ale modelului relațional:\n- Datele sunt organizate în tabele bidimensionale.\n- Utilizarea cheilor primare pentru a identifica unic fiecare înregistrare.\n- Cheile străine definesc relațiile între tabele."
+      }
+    ]
+  },
+  {
+    "question_id": "F.9",
+    "question": "Scrieți o interogare SQL care creează o vedere numită emp20 ce conține angajații din departamentul 20.",
+    "reference_answer": "CREATE VIEW emp20 AS SELECT empno, ename, job, sal FROM emp WHERE deptno = 20;",
+    "sections_used": [
+      {
+        "section_id": "sec_F9_01",
+        "from_pdf_file": "C9-BD_2025.pdf",
+        "section_text": "CREATE VIEW emp20 \nAS SELECT empno, ename, job, sal\nFROM  emp\nWHERE deptno = 20;"
+      }
+    ]
+  },
+  {
+    "question_id": "F.10",
+    "question": "Descrieți procesul de proiectare a bazelor de date relaționale, menționând etapele principale.",
+    "reference_answer": "Etapele proiectării bazelor de date: 1. Identificarea cerințelor; 2. Modelarea conceptuală (diagrame ER); 3. Modelarea logică (transformarea modelului conceptual într-un model relațional); 4. Modelarea fizică; 5. Normalizarea.",
+    "sections_used": [
+      {
+        "section_id": "sec_F10_01",
+        "from_pdf_file": "C14-BD_2025.pdf",
+        "section_text": "1.1 Etapele proiectării bazelor de date\n\n1. Identificarea cerințelor - Colectarea cerințelor utilizatorilor și analiza acestora.\n2. Modelarea conceptuală - Crearea unui model abstract al bazei de date folosind diagrame ER (Entity-Relationship).\n3. Modelarea logică - Transformarea modelului conceptual într-un model relațional.\n4. Modelarea fizică - Optimizarea modelului logic pentru implementare în SGBD.\n5. Normalizarea - Aplicarea regulilor pentru a elimina redundanța și asigura integritatea datelor."
+      }
+    ]
+  }
+]
