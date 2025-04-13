@@ -1,0 +1,123 @@
+[
+    {
+      "question_id": "F.1",
+      "question": "Explicați conceptul de operator LIKE în SQL și semnificația caracterului wildcard '%'.",
+      "reference_answer": "Operatorul LIKE este folosit pentru a căuta modele în șiruri de caractere. Caracterele wildcard, cum ar fi '%', reprezintă o secvență de 0 sau mai multe caractere, permițând astfel potrivirea flexibilă a șirurilor.",
+      "sections_used": [
+        {
+          "section_id": "sec_F1_01",
+          "from_pdf_file": "C3-BD_2025.pdf",
+          "section_text": "Explicațiile privind utilizarea operatorului LIKE, unde se menționează că '%' poate înlocui orice secvență de caractere, sunt fundamentale pentru construirea condițiilor de filtrare în SQL."
+        }
+      ]
+    },
+    {
+      "question_id": "F.2",
+      "question": "Scrieți o interogare SQL care extrage numele angajaților care au același manager ca și angajatul cu prenumele 'JONES'.",
+      "reference_answer": "SELECT ename FROM emp WHERE mgr = (SELECT mgr FROM emp WHERE ename = 'JONES');",
+      "sections_used": [
+        {
+          "section_id": "sec_F2_01",
+          "from_pdf_file": "C6-BD_2025.pdf",
+          "section_text": "Subinterogările single-row sunt utilizate pentru a obține o valoare unică, așa cum se arată în exemplul în care se extrage managerul unui angajat specific."
+        }
+      ]
+    },
+    {
+      "question_id": "F.3",
+      "question": "Descrieți rolul clauzei GROUP BY în SQL și oferiți un exemplu de calcul al mediei salariilor pe departamente, rotunjită la trei zecimale.",
+      "reference_answer": "Clauza GROUP BY este folosită pentru a agrega date pe baza valorilor comune dintr-o coloană. Exemplu: SELECT deptno, ROUND(AVG(sal), 3) FROM emp GROUP BY deptno;",
+      "sections_used": [
+        {
+          "section_id": "sec_F3_01",
+          "from_pdf_file": "C5-BD_2025.pdf",
+          "section_text": "Documentația prezintă utilizarea funcțiilor de agregare împreună cu clauza GROUP BY, iar funcția ROUND este folosită pentru a rotunji rezultatul la un număr specific de zecimale."
+        }
+      ]
+    },
+    {
+      "question_id": "F.4",
+      "question": "Scrieți o comandă SQL pentru actualizarea salariului unui angajat cu prenumele 'FORD' cu o creștere de 3%.",
+      "reference_answer": "UPDATE emp SET sal = sal * 1.03 WHERE ename = 'FORD';",
+      "sections_used": [
+        {
+          "section_id": "sec_F4_01",
+          "from_pdf_file": "C7-BD_2025.pdf",
+          "section_text": "Exemplele de DML din cursul de manipulare a datelor prezintă comanda UPDATE pentru modificarea valorilor dintr-o tabelă, exemplificând cum se aplică o creștere procentuală."
+        }
+      ]
+    },
+    {
+      "question_id": "F.5",
+      "question": "Explicați importanța constrângerilor NOT NULL, UNIQUE și FOREIGN KEY în proiectarea bazelor de date.",
+      "reference_answer": "Constrângerile NOT NULL asigură că o coloană nu poate avea valori nule, UNIQUE garantează unicitatea valorilor, iar FOREIGN KEY menține integritatea referențială între tabele, legând valorile dintr-o coloană la valorile dintr-o altă tabelă.",
+      "sections_used": [
+        {
+          "section_id": "sec_F5_01",
+          "from_pdf_file": "C8-BD_2025.pdf",
+          "section_text": "Documentul de constrângeri explică rolul fiecărui tip de constrângere în asigurarea integrității datelor și în prevenirea introducerii de date invalide."
+        }
+      ]
+    },
+    {
+      "question_id": "F.6",
+      "question": "Descrieți conceptul de vedere (view) în SQL și menționați un avantaj major al utilizării lor.",
+      "reference_answer": "O vedere este o tabelă virtuală generată de o interogare SELECT, care nu stochează date propriu-zise, ci oferă o fereastră către datele din tabelele de bază. Un avantaj este accesul restricționat la date, permițând prezentarea unui subset de date utilizatorilor.",
+      "sections_used": [
+        {
+          "section_id": "sec_F6_01",
+          "from_pdf_file": "C9-BD_2025.pdf",
+          "section_text": "Secțiunile din cursul de vederi (views) evidențiază faptul că acestea sunt definite prin interogări și pot fi folosite pentru a restricționa accesul la anumite date."
+        }
+      ]
+    },
+    {
+      "question_id": "F.7",
+      "question": "Explicați pe scurt procesul de proiectare a unei baze de date relaționale, menționând cel puțin trei etape esențiale.",
+      "reference_answer": "Procesul de proiectare include identificarea cerințelor, modelarea conceptuală (crearea diagramei ER), modelarea logică (transformarea modelului conceptual într-un model relațional) și, ulterior, modelarea fizică și normalizarea.",
+      "sections_used": [
+        {
+          "section_id": "sec_F7_01",
+          "from_pdf_file": "C14-BD_2025.pdf",
+          "section_text": "Fragmentul din Cursul 14 prezintă etapele esențiale ale proiectării bazelor de date, inclusiv identificarea cerințelor, modelarea conceptuală și logică, normalizarea și optimizarea."
+        }
+      ]
+    },
+    {
+      "question_id": "F.8",
+      "question": "Care sunt principalele caracteristici ale modelului relațional de baze de date?",
+      "reference_answer": "Modelul relațional organizează datele în tabele bidimensionale, utilizează chei primare pentru identificarea unică a înregistrărilor și chei străine pentru definirea relațiilor între tabele, asigurând astfel integritatea și independența datelor.",
+      "sections_used": [
+        {
+          "section_id": "sec_F8_01",
+          "from_pdf_file": "C13-BD_2025.pdf",
+          "section_text": "Documentul despre modelul relațional descrie organizarea datelor în tabele, utilizarea cheilor primare și străine, precum și independența datelor față de aplicații."
+        }
+      ]
+    },
+    {
+      "question_id": "F.9",
+      "question": "Descrieți importanța securității în accesul la baza de date și menționați două mecanisme utilizate pentru controlul accesului.",
+      "reference_answer": "Securitatea bazei de date este esențială pentru protejarea datelor sensibile. Mecanismele includ autentificarea (verificarea identității utilizatorilor prin parole) și acordarea de privilegii (privilegii de sistem și de obiect) pentru a controla operațiile permise pe date.",
+      "sections_used": [
+        {
+          "section_id": "sec_F9_01",
+          "from_pdf_file": "C11-BD_2025.pdf",
+          "section_text": "Secțiunile privind controlul accesului și securitatea bazei de date prezintă modalitățile prin care se asigură accesul autorizat și protejarea datelor, inclusiv utilizarea privilegiilor și a rolurilor."
+        }
+      ]
+    },
+    {
+      "question_id": "F.10",
+      "question": "Explicați diferența dintre bazele de date ierarhice și cele relaționale, menționând un avantaj al modelelor relaționale.",
+      "reference_answer": "Bazele de date ierarhice organizează datele într-o structură de tip arbore, unde fiecare înregistrare are un singur părinte, în timp ce bazele de date relaționale stochează datele în tabele interconectate. Un avantaj al modelelor relaționale este flexibilitatea în interogare, oferită prin limbajul SQL standardizat.",
+      "sections_used": [
+        {
+          "section_id": "sec_F10_01",
+          "from_pdf_file": "C12-BD_2025.pdf",
+          "section_text": "Fragmentul din Cursul 12 explică diferențele dintre bazele de date tradiționale bazate pe fișiere și bazele de date moderne, evidențiind avantajele modelului relațional în ceea ce privește flexibilitatea și integritatea datelor."
+        }
+      ]
+    }
+  ]
+  
