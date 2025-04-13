@@ -1,0 +1,183 @@
+[
+    {
+      "question_id": "I.1",
+      "question": "I.1) Care dintre urmatoarele comenzi SQL permite afisarea numarului de salariati pe fiecare departament care incepe cu litera 'A'.",
+      "options": [
+        "a) SELECT empno, ename, dname FROM emp e, dept d WHERE e.deptno = d.deptno AND ename LIKE 'A%';",
+        "b) SELECT empno, ename, dname FROM emp e, dept d WHERE e.deptno = d.deptno AND ename LIKE 'A*';",
+        "c) SELECT empno, ename, dname FROM emp e, dept d WHERE e.deptno = d.deptno AND ename LIKE A*;",
+        "d) SELECT empno, ename, dname FROM emp e, dept d WHERE e.deptno = d.deptno AND ename LIKE A%;"
+      ],
+      "answer": "a",
+      "sections_used": [
+        {
+          "section_id": "sec_001",
+          "from_pdf_file": "C3-BD_2025.pdf",
+          "section_text": "Pentru construirea modelului şirului căutat pot fi folosite 2 simboluri: % : orice secvenţă de 0 sau mai multe caractere. Exemplu: SELECT * FROM EMP WHERE ename LIKE 'S%';"
+        }
+      ]
+    },
+    {
+      "question_id": "I.2",
+      "question": "I.2) Care dintre urmatoarele instructiuni SQL permite stergerea salariatilor angajati înainte de începutul anului 1982 cu profesia \"ANALYST\".",
+      "options": [
+        "a) UPDATE emp SET hiredate<={01/01/1982} AND job = \"ANALYST\";",
+        "b) DELETE FROM emp WHERE hiredate<={01/01/1982} AND job =\"ANALYST\";",
+        "c) DELETE FROM emp WHERE hiredate<='01/01/1982' AND job='ANALYST';",
+        "d) DELETE * FROM emp WHERE job LIKE \"ANALYST\" HAVING year(hiredate)<=1982;"
+      ],
+      "answer": "c",
+      "sections_used": [
+        {
+          "section_id": "sec_002",
+          "from_pdf_file": "C2-BD_2025.pdf",
+          "section_text": "În SQL, pentru condițiile cu date calendaristice se folosesc ghilimele simple și valorile trebuie introduse în formatul corect, astfel exemplul corect este: DELETE FROM emp WHERE hiredate<='01/01/1982' AND job='ANALYST';"
+        }
+      ]
+    },
+    {
+      "question_id": "I.3",
+      "question": "I.3) Care dintre urmatoarele instructiuni SQL permite afisarea numelui si salariului angajatilor care-l au ca manager pe JONES.",
+      "options": [
+        "a) SELECT ename AS \"Nume\", sal AS \"Salariu\" FROM emp WHERE ename = 'JONES');",
+        "b) SELECT ename FROM emp WHERE mgr = ( SELECT mgr FROM emp WHERE ename = 'JONES');",
+        "c) SELECT ename AS \"Nume\", sal AS \"Salariu\" FROM emp WHERE mgr = ( SELECT mgr FROM emp WHERE ename <> 'MARTIN');",
+        "d) SELECT ename AS \"Nume\", sal AS \"Salariu\" FROM emp WHERE mgr = ( SELECT mgr FROM emp WHERE ename LIKE 'MARTIN');"
+      ],
+      "answer": "b",
+      "sections_used": [
+        {
+          "section_id": "sec_003",
+          "from_pdf_file": "C6-BD_2025.pdf",
+          "section_text": "Subinterogările single-row sunt utilizate pentru a extrage o valoare unică, exemplu: SELECT ename FROM emp WHERE mgr = (SELECT mgr FROM emp WHERE ename = 'JONES');"
+        }
+      ]
+    },
+    {
+      "question_id": "I.4",
+      "question": "I.4) Care dintre urmatoarele instructiuni SQL permite afisare anumele celui mai recent angajat din departamentului 20.",
+      "options": [
+        "a) SELECT ename, hiredate FROM emp WHERE max(hiredate) AND deptno = 20;",
+        "b) SELECT ename, max(hiredate) FROM emp WHERE hiredate AND deptno = 20;",
+        "c) SELECT ename, hiredate FROM emp WHERE hiredate = max(hiredate) AND deptno = 20;",
+        "d) SELECT ename, hiredate FROM emp WHERE hiredate = ( SELECT max(hiredate) FROM emp WHERE deptno = 20) AND deptno = 20;"
+      ],
+      "answer": "d",
+      "sections_used": [
+        {
+          "section_id": "sec_004",
+          "from_pdf_file": "C6-BD_2025.pdf",
+          "section_text": "Utilizarea subinterogărilor pentru extragerea valorii maxime dintr-un grup se face astfel: SELECT ename, hiredate FROM emp WHERE hiredate = (SELECT max(hiredate) FROM emp WHERE deptno = 20) AND deptno = 20;"
+        }
+      ]
+    },
+    {
+      "question_id": "I.5",
+      "question": "I.5) Care dintre urmatoarele instructiuni SQL permite afisare anumelui si a salariului angajatilor cu cel mai mare comision, acolo unde exista.",
+      "options": [
+        "a) SELECT ename, MAX(sal) FROM emp WHERE comm = ( SELECT MAX(comm) FROM emp);",
+        "b) SELECT ename, sal FROM emp WHERE comm = ( SELECT MAX(comm) FROM emp);",
+        "c) SELECT ename, sal FROM emp WHERE comm = MAX(comm);",
+        "d) SELECT ename, sal FROM emp WHERE comm <> ( SELECT MAX(comm) FROM emp);"
+      ],
+      "answer": "b",
+      "sections_used": [
+        {
+          "section_id": "sec_005",
+          "from_pdf_file": "C5-BD_2025.pdf",
+          "section_text": "Pentru a selecta rândurile în funcție de valoarea maximă a unei coloane, se utilizează o subinterogare, exemplu: SELECT ename, sal FROM emp WHERE comm = (SELECT MAX(comm) FROM emp);"
+        }
+      ]
+    },
+    {
+      "question_id": "I.6",
+      "question": "I.6) Sa se mareasca cu 3% salariului angajatului cu prenumele \"FORD\".",
+      "options": [
+        "a) SELECT ename, sal, sal* 1.3 FROM EMP WHERE ename='FORD';",
+        "b) UPDATE EMP SET sal = sal*1.3 WHERE ename = 'FORD';",
+        "c) UPDATE EMP SET sal = sal*1.3 WHERE ename <> 'FORD';",
+        "d) UPDATE EMP SET sal*1.3 WHERE ename = 'FORD';"
+      ],
+      "answer": "b",
+      "sections_used": [
+        {
+          "section_id": "sec_006",
+          "from_pdf_file": "C7-BD_2025.pdf",
+          "section_text": "Pentru actualizarea datelor dintr-o tabelă se folosește comanda UPDATE. Exemplu: UPDATE EMP SET sal = sal*1.3 WHERE ename = 'FORD';"
+        }
+      ]
+    },
+    {
+      "question_id": "I.7",
+      "question": "I.7) Care dintre urmatoarele instructiuni SQL permite afisarea mediei pe departamente a tuturor angajatilor, rotunjita la trei zecimale exacte din tabela EMP.",
+      "options": [
+        "a) SELECT e.deptno, ROUND(AVG(e.sal), 3), d.dname FROM emp e, dept d WHERE d.deptno <> e.deptno GROUP BY e.deptno, d.dname;",
+        "b) SELECT e.deptno, sal, d.dname FROM emp e, dept d WHERE d.deptno = e.deptno GROUP BY e.deptno, d.dname;",
+        "c) SELECT e.deptno, ROUND(AVG(e.sal), 3), d.dname FROM emp e, dept d WHERE d.deptno = e.deptno;",
+        "d) SELECT e.deptno, ROUND(AVG(e.sal), 3), d.dname FROM emp e, dept d WHERE d.deptno = e.deptno GROUP BY e.deptno, d.dname;"
+      ],
+      "answer": "d",
+      "sections_used": [
+        {
+          "section_id": "sec_007",
+          "from_pdf_file": "C5-BD_2025.pdf",
+          "section_text": "Pentru a calcula media și a rotunji rezultatul la 3 zecimale, se folosește funcția ROUND în combinaţie cu AVG, iar pentru agregare pe departamente se utilizează clauza GROUP BY. Exemplu: SELECT e.deptno, ROUND(AVG(e.sal), 3), d.dname FROM emp e, dept d WHERE d.deptno = e.deptno GROUP BY e.deptno, d.dname;"
+        }
+      ]
+    },
+    {
+      "question_id": "I.8",
+      "question": "I.8) Care dintre urmatoarele instructiuni SQL permite afisezarea id-ului departamentelor care au media salariilor mai mare decat media salariilor din departamentul 30.",
+      "options": [
+        "a) SELECT deptno, AVG(sal) FROM emp GROUP BY deptno WHERE AVG(sal) > ( SELECT AVG(sal) FROM emp WHERE deptno = 30);",
+        "b) SELECT deptno, AVG(sal) FROM emp GROUP BY deptno HAVING AVG(sal) > ( SELECT AVG(sal) FROM emp WHERE deptno = 30);",
+        "c) SELECT deptno, AVG(sal) FROM emp GROUP BY deptno WHERE AVG(sal) >= ( SELECT AVG(sal) FROM emp HAVING deptno = 30);",
+        "d) SELECT deptno, MAX(sal) FROM emp GROUP BY deptno HAVING AVG(sal) > ( SELECT MAX(sal) FROM emp WHERE deptno = 30);"
+      ],
+      "answer": "b",
+      "sections_used": [
+        {
+          "section_id": "sec_008",
+          "from_pdf_file": "C3-BD_2025.pdf",
+          "section_text": "Pentru filtrarea grupurilor după o condiţie agregată se foloseşte clauza HAVING. Exemplu: SELECT deptno, AVG(sal) FROM emp GROUP BY deptno HAVING AVG(sal) > (SELECT AVG(sal) FROM emp WHERE deptno = 30);"
+        }
+      ]
+    },
+    {
+      "question_id": "I.9",
+      "question": "I.9) Care dintre urmatoarele instructiuni SQL permite afisarea angajatului cu salariul maxim.",
+      "options": [
+        "a) SELECT ename, sal FROM emp WHERE sal = (SELECT MAX(sal) FROM emp);",
+        "b) SELECT ename, sal FROM emp WHERE sal = (SELECT AVG(sal) FROM emp);",
+        "c) SELECT ename, MAX(sal) FROM emp WHERE sal = (SELECT MAX(sal) FROM emp);",
+        "d) SELECT ename, sal FROM emp WHERE sal <> (SELECT MAX(sal) FROM emp);"
+      ],
+      "answer": "a",
+      "sections_used": [
+        {
+          "section_id": "sec_009",
+          "from_pdf_file": "C3-BD_2025.pdf",
+          "section_text": "Pentru a obţine angajatul cu salariul maxim, se foloseşte o subinterogare: SELECT ename, sal FROM emp WHERE sal = (SELECT MAX(sal) FROM emp);"
+        }
+      ]
+    },
+    {
+      "question_id": "I.10",
+      "question": "I.10) Care dintre urmatoarele instructiuni SQL permite numelui si a numarului departamentului pentru toti angajatii care lucreaza in departamentul 20 sau departamentul 30, ordonati alfabetic dupa nume.",
+      "options": [
+        "a) SELECT ename, deptno FROM EMP WHERE deptno <> 20 OR deptno = 30 ORDER BY ename;",
+        "b) SELECT ename, deptno FROM EMP WHERE deptno = 20 AND deptno = 30 ORDER BY ename;",
+        "c) SELECT ename, deptno FROM EMP WHERE deptno = 20 OR deptno = 30 ORDER BY ename;",
+        "d) SELECT ename, deptno FROM EMP WHERE deptno = 20 OR deptno <> 30 ORDER BY ename;"
+      ],
+      "answer": "c",
+      "sections_used": [
+        {
+          "section_id": "sec_010",
+          "from_pdf_file": "C3-BD_2025.pdf",
+          "section_text": "Pentru a selecta rândurile care corespund uneia dintre două condiţii se foloseşte operatorul OR. Exemplu: SELECT ename, deptno FROM emp WHERE deptno = 20 OR deptno = 30 ORDER BY ename;"
+        }
+      ]
+    }
+  ]
+  

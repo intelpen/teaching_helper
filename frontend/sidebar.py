@@ -1,7 +1,7 @@
 import streamlit as st
 
 # initial
-#def render_sidebar():
+# def render_sidebar():
 #    st.header("Assisted Learning")
 #    st.selectbox("Select Chapter/Unit", ["Introduction", "Advanced Topics"])
 #    st.subheader("Evaluation")
@@ -10,11 +10,11 @@ import streamlit as st
 #    st.text_input("Provide Feedback")
 
 # alta varianta
-#def render_sidebar():
+# def render_sidebar():
 #    st.set_page_config(page_title="Assisted Learning", page_icon="🤖")
 #    st.title("Virtual assistant")
 
-#sidebar
+# sidebar
 #    with st.sidebar:
 #        st.selectbox("Select Chapter/Unit", ["Introduction", "Advanced Topics"])
 #        st.write("Make a choice")
@@ -24,7 +24,7 @@ import streamlit as st
 #        st.text_input("Provide Feedback")
 
 # varianta 2
-#def render_sidebar():
+# def render_sidebar():
 #    st.title("Virtual Assistant")
 #    with st.sidebar:
 #        st.selectbox("Select Chapter/Unit", ["Introduction", "Advanced Topics"], key="chapter_select")
@@ -34,7 +34,7 @@ import streamlit as st
 #        st.subheader("Feedback Survey")
 #        st.text_input("Provide Feedback", key="feedback_input")
 
-#def render_dialog():
+# def render_dialog():
 #    st.container()  # Wrap dialog content in a container for custom CSS targeting
 #    st.header("Main Dialog Zone")
 #    dialog_type = st.selectbox("Select Dialog Type", ["Learning", "Evaluation"], key="dialog_type")
@@ -44,8 +44,8 @@ import streamlit as st
 #        response = respond_to_query(user_input, dialog_type)
 #        st.write(response)
 
-#def respond_to_query(query, dialog_type):
-    # Mock function for demonstration
+# def respond_to_query(query, dialog_type):
+# Mock function for demonstration
 #    return f"Response to '{query}' in context of '{dialog_type}'."
 
 
@@ -54,7 +54,8 @@ def render_sidebar():
 
     with st.sidebar:
         # Chapter selection dropdown
-        st.selectbox("Select Chapter/Unit", ["Introduction", "Advanced Topics"], key="chapter_select")
+        st.selectbox("Select Chapter/Unit",
+                     ["Introduction", "Advanced Topics"], key="chapter_select")
         st.write("Make a choice")
 
         # TODO: Align course buttons
@@ -74,7 +75,17 @@ def render_sidebar():
 
         # Evaluation section
         st.subheader("Evaluation")
-        st.button("Evaluate Chapter")
+        if st.button("Mock Evaluation 1"):
+            # Activate survey mode
+            st.session_state["mock_evaluation_1_active"] = True
+
+        if st.button("Mock Evaluation 2"):
+            # Activate survey mode
+            st.session_state["mock_evaluation_2_active"] = True
+
+        if st.button("Final Evaluation"):
+            # Activate survey mode
+            st.session_state["final_evaluation_active"] = True
 
         # Add Survey Button
         st.subheader("Feedback Survey")
@@ -85,7 +96,7 @@ def render_sidebar():
             picture_url = st.session_state['user_info'].get('picture')
             if picture_url:
                 st.image(picture_url)  # Explicitly check image loading
-            st.write('Hello, '+ st.session_state['user_info'].get('name'))
+            st.write('Hello, ' + st.session_state['user_info'].get('name'))
             # st.write('Your email is '+ st.session_state['user_info'].get('email'))
             if st.button('Log out'):
                 st.session_state.clear()  # Clear all session state data

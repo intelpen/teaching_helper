@@ -3,7 +3,7 @@ from backend.chatbot import start_dialog, respond_to_query
 from streamlit_pdf_viewer import pdf_viewer
 
 # varianta
-#def render_dialog():
+# def render_dialog():
 #    st.header("Main Dialog Zone")
 #    dialog_type = st.selectbox("Select Dialog Type", ["Learning", "Evaluation"])
 #    user_input = st.text_input("Ask a question or start the dialog:")
@@ -12,14 +12,14 @@ from streamlit_pdf_viewer import pdf_viewer
 #        response = respond_to_query(user_input, dialog_type)
 #        st.write(response)
 
-#varianta 3
-#import streamlit as st
-#from pathlib import Path
+# varianta 3
+# import streamlit as st
+# from pathlib import Path
 
-#def render_dialog(pdf_file):
+# def render_dialog(pdf_file):
 #    left, right = st.columns([1, 2])  # Split the main dialog zone
 
-    # Left Zone: Display PDF in Browser Viewer
+# Left Zone: Display PDF in Browser Viewer
 #    with left:
 #        st.subheader("PDF Viewer")
 #        if pdf_file:
@@ -30,7 +30,7 @@ from streamlit_pdf_viewer import pdf_viewer
 #        else:
 #            st.info("No file selected. Select a course from the sidebar.")
 
-    # Right Zone: Chat Interface
+# Right Zone: Chat Interface
 #    with right:
 #        st.subheader("Chat Interface")
 #        dialog_type = st.selectbox("Select Dialog Type", ["Learning", "Evaluation"], key="dialog_type")
@@ -42,19 +42,19 @@ from streamlit_pdf_viewer import pdf_viewer
 
 
 # Mock Query Response
-#def respond_to_query(query, dialog_type):
+# def respond_to_query(query, dialog_type):
 #    return f"Response to '{query}' in context of '{dialog_type}'."
 
 #############################################################################################
 # varianta doar cu functionalitate la Course 1, 2, ...
-#import streamlit as st
-#import base64
-#from pathlib import Path
+# import streamlit as st
+# import base64
+# from pathlib import Path
 
-#def render_dialog(pdf_file):
+# def render_dialog(pdf_file):
 #    left, right = st.columns([1, 2])  # Split the main dialog zone
 
-    # Left Zone: Display PDF Viewer
+# Left Zone: Display PDF Viewer
 #    with left:
 #        st.subheader("PDF Viewer")
 #        if pdf_file:
@@ -65,7 +65,7 @@ from streamlit_pdf_viewer import pdf_viewer
 #        else:
 #            st.info("No file selected. Select a course from the sidebar.")
 
-    # Right Zone: Chat Interface
+# Right Zone: Chat Interface
 #    with right:
 #        st.subheader("Chat Interface")
 #        dialog_type = st.selectbox("Select Dialog Type", ["Learning", "Evaluation"], key="dialog_type")
@@ -77,7 +77,7 @@ from streamlit_pdf_viewer import pdf_viewer
 
 
 # Function to embed PDF in Streamlit
-#def pdf_viewer(pdf_file):
+# def pdf_viewer(pdf_file):
 #    with open(pdf_file, "rb") as f:
 #        base64_pdf = base64.b64encode(f.read()).decode("utf-8")
 #    pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="100%" height="700px"></iframe>'
@@ -85,11 +85,11 @@ from streamlit_pdf_viewer import pdf_viewer
 
 
 # Mock Query Response
-#def respond_to_query(query, dialog_type):
+# def respond_to_query(query, dialog_type):
 #    return f"Response to '{query}' in context of '{dialog_type}'."
 
 
-####################### incercare de functionalitate la Survey:
+# incercare de functionalitate la Survey:
 
 import streamlit as st
 from reportlab.lib.pagesizes import letter
@@ -116,6 +116,114 @@ def generate_pdf(responses):
             y = 750
     c.save()
     return pdf_path
+
+
+mock_evaluations = [
+    # First evaluation - Basic SQL Concepts
+    [
+        {"type": "radio", "question": "1. Which of the following is NOT a basic SQL command?",
+         "options": ["SELECT", "UPDATE", "MODIFY", "DELETE"]},
+        {"type": "checkbox", "question": "2. Which of these are valid SQL data types? (Select all that apply)",
+         "options": ["INTEGER", "VARCHAR", "BOOLEAN", "FLOAT", "STRING"]},
+        {"type": "radio", "question": "3. What does DDL stand for in SQL?",
+         "options": ["Data Definition Language", "Data Manipulation Language", "Database Definition Logic", "None of these"]},
+        {"type": "radio", "question": "4. Which clause is used to filter rows in SQL?",
+         "options": ["WHERE", "HAVING", "GROUP BY", "ORDER BY"]},
+        {"type": "checkbox", "question": "5. Which of these statements can be used to modify data in a database? (Select all that apply)",
+         "options": ["INSERT", "UPDATE", "DELETE", "ALTER", "SELECT"]}
+    ],
+    # Second evaluation - Advanced SQL Topics
+    [
+        {"type": "radio", "question": "1. What is a foreign key?",
+         "options": ["A key from another country", "A key that can access any table", "A field that links two tables", "A unique identifier"]},
+        {"type": "checkbox", "question": "2. Which of these are types of JOIN in SQL? (Select all that apply)",
+         "options": ["INNER JOIN", "LEFT JOIN", "RIGHT JOIN", "CROSS JOIN", "DIAGONAL JOIN"]},
+        {"type": "radio", "question": "3. What is the purpose of HAVING clause?",
+         "options": ["Filter groups", "Filter rows", "Sort results", "Join tables"]},
+        {"type": "radio", "question": "4. Which statement is used to combine results from multiple SELECT statements?",
+         "options": ["UNION", "JOIN", "MERGE", "COMBINE"]},
+        {"type": "checkbox", "question": "5. Which of these are aggregate functions in SQL? (Select all that apply)",
+         "options": ["COUNT", "SUM", "AVG", "MIN", "MEDIAN"]}
+    ]
+]
+
+
+def render_mock_evaluation(eval_number):
+    questions = mock_evaluations[eval_number]
+
+    # Initialize session state for progress tracking
+    if "mock_eval_state" not in st.session_state:
+        st.session_state["mock_eval_state"] = {
+            "current_question": 0,  # Tracks the current question index
+            "responses": {},        # Stores the user's responses
+            "completed": False,     # Indicates if the evaluation is completed
+            "submitted": False      # Tracks if the submit button was clicked
+        }
+
+    eval_state = st.session_state["mock_eval_state"]
+    current_question_index = eval_state["current_question"]
+    responses = eval_state["responses"]
+
+    # Layout for the evaluation: Left for questions, Right for responses
+    left, right = st.columns([2, 1])
+
+    # Left Column: Display the current question
+    with left:
+        if not eval_state["completed"]:
+            if current_question_index < len(questions):
+                question = questions[current_question_index]
+
+                # Render the appropriate input type
+                if question["type"] == "radio":
+                    responses[question["question"]] = st.radio(
+                        question["question"],
+                        question["options"],
+                        key=f"eval_q{current_question_index}"
+                    )
+                elif question["type"] == "checkbox":
+                    responses[question["question"]] = st.multiselect(
+                        question["question"],
+                        question["options"],
+                        default=responses.get(question["question"], []),
+                        key=f"eval_q{current_question_index}"
+                    )
+                elif question["type"] == "text_conditional":
+                    dependency = question["depends_on"]
+                    condition = question["condition"]
+                    if responses.get(dependency) == condition:
+                        responses[question["question"]] = st.text_input(
+                            question["question"],
+                            value=responses.get(question["question"], ""),
+                            key=f"eval_q{current_question_index}"
+                        )
+
+                # Add "Next" button with proper state handling
+                next_button_key = f"eval_next_{current_question_index}"
+                if st.button("Next", key=next_button_key):
+                    # Increment the question index directly in session_state
+                    st.session_state["mock_eval_state"]["current_question"] += 1
+            else:
+                # Mark evaluation as completed
+                st.success(
+                    "You have completed the evaluation! Click 'Submit' to generate the report.")
+                eval_state["completed"] = True
+
+        if eval_state["completed"] and not eval_state["submitted"]:
+            if st.button("Submit", key="eval_submit"):
+                pdf_path = generate_pdf(responses)
+                st.session_state["eval_pdf_path"] = pdf_path
+                eval_state["submitted"] = True
+
+    # Right Column: Display responses so far
+    with right:
+        st.subheader("Your Responses So Far")
+        for question, answer in responses.items():
+            st.write(f"**{question}**: {answer}")
+
+        # Display the completed PDF after submission
+        if eval_state["submitted"] and st.session_state.get("eval_pdf_path"):
+            st.subheader("Completed Evaluation")
+            pdf_viewer(st.session_state["eval_pdf_path"])
 
 
 def render_survey():
@@ -193,7 +301,8 @@ def render_survey():
                     st.session_state["survey_state"]["current_question"] += 1
             else:
                 # Mark survey as completed
-                st.success("You have completed the survey! Click 'Submit' to generate the report.")
+                st.success(
+                    "You have completed the survey! Click 'Submit' to generate the report.")
                 survey_state["completed"] = True
 
         if survey_state["completed"] and not survey_state["submitted"]:
@@ -237,7 +346,6 @@ def generate_pdf(responses):
     return pdf_path
 
 
-
 def render_dialog(pdf_file):
     left, right = st.columns([0.6, 0.4])  # Adjust column width to 60% / 40%
 
@@ -245,6 +353,12 @@ def render_dialog(pdf_file):
         if st.session_state.get("survey_active", False):
             st.title("Feedback Survey")
             render_survey()
+        elif st.session_state.get("mock_evaluation_1_active", False):
+            st.title("Mock Evaluation 1")
+            render_mock_evaluation(0)  # First set of questions
+        elif st.session_state.get("mock_evaluation_2_active", False):
+            st.title("Mock Evaluation 2")
+            render_mock_evaluation(1)  # Second set of questions
         else:
             # Left Zone: Display PDF or course content
             with left:
@@ -268,15 +382,19 @@ def render_dialog(pdf_file):
                         #     )
 
                     except FileNotFoundError:
-                        st.error("PDF file not found. Please check the file path.")
+                        st.error(
+                            "PDF file not found. Please check the file path.")
                 else:
-                    st.info("No course selected. Please select a course from the sidebar.")
+                    st.info(
+                        "No course selected. Please select a course from the sidebar.")
 
             # Right Zone: Chat Interface
             with right:
                 st.subheader("Chat Interface")
-                dialog_type = st.selectbox("Select Dialog Type", ["Learning", "Evaluation"], key="dialog_type")
-                user_input = st.text_input("Ask a question or start the dialog:", key="user_input")
+                dialog_type = st.selectbox("Select Dialog Type", [
+                                           "Learning", "Evaluation"], key="dialog_type")
+                user_input = st.text_input(
+                    "Ask a question or start the dialog:", key="user_input")
 
                 if user_input:
                     response = respond_to_query(user_input, dialog_type)
