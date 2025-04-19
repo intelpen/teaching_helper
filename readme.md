@@ -158,3 +158,7 @@ gcloud projects add-iam-policy-binding clasificationfromdescription \
 --member 'serviceAccount:612652291913-compute@developer.gserviceaccount.com' \
 --role 'roles/secretmanager.secretAccessor'
 ```
+## Add an email to Gauth (New user)
+- you need an user GMAIL account (just gmail)
+- got in connsole.cloud.google.com , project clasificationfromdescription, search Oauth Consent
+Select Audience, Add users, add gmail user
