@@ -5,6 +5,7 @@ import requests
 from pathlib import Path
 from frontend.sidebar import render_sidebar
 from frontend.dialogs import render_dialog
+from backend.admin_store import initialize_admin_data, register_user
 from google_auth_oauthlib.flow import Flow
 from google.oauth2.credentials import Credentials
 
@@ -108,7 +109,11 @@ def render_main_app():
             ''', unsafe_allow_html=True)
             return
 
-    st.sidebar.title("App Navigation")
+    if st.session_state.get("connected", False):
+        initialize_admin_data()
+        user_info = st.session_state.get("user_info", {})
+        register_user(user_info.get("email"), user_info.get("name"))
+
     pdf_file = render_sidebar()
     render_dialog(pdf_file)
 
@@ -118,4 +123,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

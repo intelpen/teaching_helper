@@ -1,4 +1,8 @@
+import os
+from pathlib import Path
+
 import streamlit as st
+from backend.admin_store import add_class, get_classes, get_users, is_admin_user, set_user_admin
 from backend.chatbot import start_dialog, respond_to_query
 from streamlit_pdf_viewer import pdf_viewer
 
@@ -91,11 +95,8 @@ from streamlit_pdf_viewer import pdf_viewer
 
 # incercare de functionalitate la Survey:
 
-import streamlit as st
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
-import os
-import base64
 
 
 # Generate and save the PDF
@@ -346,59 +347,123 @@ def generate_pdf(responses):
     return pdf_path
 
 
+def render_add_class_page():
+    st.title("Add a new Class")
+    st.write("Create a class and optionally upload one or more PDF files.")
+
+    with st.form("add_class_form", clear_on_submit=True):
+        class_name = st.text_input("Class name")
+        uploaded_files = st.file_uploader(
+            "Upload class PDF files",
+            type=["pdf"],
+            accept_multiple_files=True,
+        )
+        submitted = st.form_submit_button("Create class")
+
+    if submitted:
+        try:
+            new_class = add_class(class_name, uploaded_files or [])
+            st.session_state["selected_class_name"] = new_class["name"]
+            st.success(f"Class '{new_class['name']}' was created.")
+            st.rerun()
+        except ValueError as err:
+            st.error(str(err))
+
+    existing_classes = get_classes()
+    if existing_classes:
+        st.subheader("Existing classes")
+        for class_obj in existing_classes:
+            st.write(f"- {class_obj['name']} ({len(class_obj.get('pdfs', []))} PDFs)")
+
+
+def render_manage_users_page():
+    st.title("Manage users")
+    st.write("Use the checkboxes to control admin access.")
+
+    users = get_users()
+    with st.form("manage_users_form"):
+        admin_updates: dict[str, bool] = {}
+        for user in users:
+            email = user["email"]
+            display_name = user.get("name", "").strip()
+            label = f"{display_name} ({email})" if display_name else email
+            admin_updates[email] = st.checkbox(
+                label,
+                value=bool(user.get("is_admin", False)),
+                key=f"is_admin_{email}",
+            )
+
+        saved = st.form_submit_button("Save changes")
+
+    if saved:
+        for email, is_admin in admin_updates.items():
+            set_user_admin(email, is_admin)
+        st.success("User roles were updated.")
+        st.rerun()
+
+
 def render_dialog(pdf_file):
-    left, right = st.columns([0.6, 0.4])  # Adjust column width to 60% / 40%
+    if not st.session_state.get("connected", False):
+        return
 
-    if st.session_state.get("connected", False):
-        if st.session_state.get("survey_active", False):
-            st.title("Feedback Survey")
-            render_survey()
-        elif st.session_state.get("mock_evaluation_1_active", False):
-            st.title("Mock Evaluation 1")
-            render_mock_evaluation(0)  # First set of questions
-        elif st.session_state.get("mock_evaluation_2_active", False):
-            st.title("Mock Evaluation 2")
-            render_mock_evaluation(1)  # Second set of questions
+    active_page = st.session_state.get("active_page", "Learning")
+    user_email = st.session_state.get("user_info", {}).get("email", "")
+    admin_user = is_admin_user(user_email)
+
+    if active_page == "Feedback Survey":
+        st.title("Feedback Survey")
+        render_survey()
+        return
+
+    if active_page == "Mock Evaluation 1":
+        st.title("Mock Evaluation 1")
+        render_mock_evaluation(0)
+        return
+
+    if active_page == "Mock Evaluation 2":
+        st.title("Mock Evaluation 2")
+        render_mock_evaluation(1)
+        return
+
+    if active_page == "Add a new Class":
+        if not admin_user:
+            st.error("Only admins can access this page.")
+            return
+        render_add_class_page()
+        return
+
+    if active_page == "Manage users":
+        if not admin_user:
+            st.error("Only admins can access this page.")
+            return
+        render_manage_users_page()
+        return
+
+    left, right = st.columns([0.6, 0.4])
+
+    with left:
+        selected_class_name = st.session_state.get("selected_class_name", "selected class")
+        if pdf_file:
+            st.subheader(f"Content for {selected_class_name}")
+            if Path(pdf_file).exists():
+                pdf_viewer(pdf_file)
+            else:
+                st.error("PDF file not found. Please check the file path.")
         else:
-            # Left Zone: Display PDF or course content
-            with left:
-                if pdf_file:
-                    st.subheader(f"Content for {pdf_file}")
-                    try:
-                        pdf_viewer(st.session_state["pdf_file"])
-                        # pdf_viewer(st.session_state["pdf_file"])
-                        # with open(pdf_file, "rb") as pdf:
-                        #     pdf_data = pdf.read()
-                        #     st.download_button(
-                        #         label="Download PDF",
-                        #         data=pdf_data,
-                        #         file_name=pdf_file.split("/")[-1],
-                        #         mime="application/pdf",
-                        #     )
-                        #     st.markdown(
-                        #         f'<iframe src="data:application/pdf;base64,{base64.b64encode(pdf_data).decode()}" '
-                        #         f'width="100%" height="700px"></iframe>',
-                        #         unsafe_allow_html=True,
-                        #     )
+            st.info("No PDF selected. Please choose a class and a PDF from the sidebar.")
 
-                    except FileNotFoundError:
-                        st.error(
-                            "PDF file not found. Please check the file path.")
-                else:
-                    st.info(
-                        "No course selected. Please select a course from the sidebar.")
+    with right:
+        st.subheader("Chat Interface")
+        dialog_type = st.selectbox(
+            "Select Dialog Type",
+            ["Learning", "Evaluation"],
+            key="dialog_type",
+        )
+        user_input = st.text_input("Ask a question or start the dialog:", key="user_input")
 
-            # Right Zone: Chat Interface
-            with right:
-                st.subheader("Chat Interface")
-                dialog_type = st.selectbox("Select Dialog Type", [
-                                           "Learning", "Evaluation"], key="dialog_type")
-                user_input = st.text_input(
-                    "Ask a question or start the dialog:", key="user_input")
-
-                if user_input:
-                    response = respond_to_query(user_input, dialog_type)
-                    st.write(response)
+        if user_input:
+            response = respond_to_query(user_input, dialog_type)
+            st.write(response)
 
 # # Mock Query Response
 # def respond_to_query(query, dialog_type):
