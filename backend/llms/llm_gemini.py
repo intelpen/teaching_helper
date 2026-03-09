@@ -25,7 +25,7 @@ class LLMGemini(LLMProtocol):
             project=self.config["gcp_project_id"],
             location=config["location"],
             credentials=credentials)
-        self.backend = GenerativeModel("gemini-1.5-flash-001")
+        self.backend = GenerativeModel("gemini-1.5-flash-002")
 
     def process_request(self, message):
 
