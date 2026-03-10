@@ -189,3 +189,12 @@ include/
 
 # DS_Store
 .DS_Store
+
+# Local notebook with sensitive API keys
+tests/evaluate_rag.ipynb
+tests/evaluat_rag1.ipynb
+
+# Runtime admin/class management data
+data/classes.json
+data/users.json
+data/pdfs/classes/

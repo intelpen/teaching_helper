@@ -1,0 +1,383 @@
+,user_input,retrieved_contexts,response,reference,context_precision,context_recall,answer_relevancy,faithfulness,bleu_score,rouge_score,factual_correctness
+0,Ce este SQL?,"['operaţiile ce urmează.  \n• Dacă o cerere SQL este concepută să elimine \nînregistrări/grupuri doar folosind clauza HAVING, \natunci ar fi bine de încercat dacă este posibil şi prin \nclauza WHERE. De obicei, totuşi, această rescriere nu \nva fi posibilă.  \nCurs 5 - BAZE DE DATE 50', 'copyright@www.adrian.runceanu.ro \nFuncţii \n  O observaţie importanta este faptul că dacă se \napelează o funcţie SQL ce are un argument (parametru) \negal cu valoarea Null, atunci în mod automat rezultatul \nva avea valoarea Null.  \n  Singurele funcţii care nu respectă această regulă \nsunt:  \n– CONCAT', 'copyright@www.adrian.runceanu.ro \nFuncţii \n  O observaţie importanta este faptul că dacă se \napelează o funcţie SQL ce are un argument (parametru) \negal cu valoarea Null, atunci în mod automat rezultatul \nva avea valoarea Null.  \n  Singurele funcţii care nu respectă această regulă \nsunt:  \n– CONCAT', 'copyright@www.adrian.runceanu.ro \nLimbajul SQL \nInterogări SELECT pe o singură tabelă (partea II) \n \n4.2. Funcţii referitoare la o singură înregistrare \n 4.2.1. Funcţii pentru şiruri de caractere \n 4.2.2. Funcţii de tip numeric \n 4.2.3. Funcţii de tip dată calendaristică şi oră', 'copyright@www.adrian.runceanu.ro \nLimbajul SQL \nInterogări SELECT pe o singură tabelă (partea II) \n \n4.2. Funcţii referitoare la o singură înregistrare \n 4.2.1. Funcţii pentru şiruri de caractere \n 4.2.2. Funcţii de tip numeric \n 4.2.3. Funcţii de tip dată calendaristică şi oră', 'copyright@www.adrian.runceanu.ro \nLimbajul SQL \nInterogări SELECT pe o singură tabelă (partea II) \n \n4.2. Funcţii referitoare la o singură înregistrare \n 4.2.1. Funcţii pentru şiruri de caractere \n 4.2.2. Funcţii de tip numeric \n 4.2.3. Funcţii de tip dată calendaristică şi oră', 'copyright@www.adrian.runceanu.ro \nLimbajul SQL \nInterogări SELECT pe o singură tabelă (partea II) \n \n4.2. Funcţii referitoare la o singură înregistrare \n 4.2.1. Funcţii pentru şiruri de caractere \n 4.2.2. Funcţii de tip numeric \n 4.2.3. Funcţii de tip dată calendaristică şi oră', 'copyright@www.adrian.runceanu.ro \nLimbajul SQL \nInterogări SELECT pe o singură tabelă (partea II) \n \n4.2. Funcţii referitoare la o singură înregistrare \n 4.2.1. Funcţii pentru şiruri de caractere \n 4.2.2. Funcţii de tip numeric \n 4.2.3. Funcţii de tip dată calendaristică şi oră', 'copyright@www.adrian.runceanu.ro \nLimbajul SQL \nInterogări SELECT pe o singură tabelă (partea II) \n \n4.2. Funcţii referitoare la o singură înregistrare \n 4.2.1. Funcţii pentru şiruri de caractere \n 4.2.2. Funcţii de tip numeric \n 4.2.3. Funcţii de tip dată calendaristică şi oră', 'copyright@www.adrian.runceanu.ro \nLimbajul SQL \nInterogări SELECT pe o singură tabelă (partea II) \n \n4.1. Funcţii \n4.2. Funcţii referitoare la o singură înregistrare \n \nCurs 4 - BAZE DE DATE 3']","## Ce este SQL?
+
+**SQL** (Structured Query Language), în română **Limbajul de interogare structurat**, este un limbaj specializat folosit pentru comunicarea cu bazele de date. Funcționează prin trimiterea de comenzi text către o bază de date, prin care se pot realiza diverse operațiuni, precum:
+
+* **Interogarea datelor:** extragerea datelor specifice din bazele de date;
+* **Inserarea de date:** adăugarea unor noi intrări in baza de date;
+* **Actualizarea de date:** modificări ale datelor existente in baze de date;
+* **Ștergerea de date:** eliminarea unor intrări din bazele de datelor.
+
+**Exemple de utilizare a SQL:**
+
+* **Obținerea unei liste a tuturor produselor dintr-un magazin online:**
+```sql
+SELECT * FROM produse;
+```
+* **Găsirea tuturor clienților care locuiesc in București:**
+```sql
+SELECT nume, prenume, adresa FROM clienti
+WHERE oras = ""Bucuresti"";
+```
+* **Actualizarea prețului unui produs:**
+```sql
+UPDATE produse SET pret = pret * (1 + inflationRate) WHERE nume = ""Laptop HP""; 
+```
+* **Ștergere tuturor comenzilor plasate inainte de 1 ianuarie 2023:**
+ ```sql
+DELETE FROM comenzi WHERE data_comanda < '01-01-2023';
+ ```
+
+**Beneficiile folosirii SQL:**
+
+* **Limbaj standard:** SQL este utilizat in majoritatea bazelor de date, facandu-l un instrument universal.
+* **Simplu și intuitiv:** Sintaxa SQL este usor 
+   de invatat si de inteles.
+* **Versatil:** Permite o gamă vastă  de operațiuni pe bazele de 
+   date.
+  
+**In concluzie:**
+
+SQL este un instrument esențial pentru oricine lucrează 
+   cu bazele de 
+   date, fiind util pentru extragerea, modificarea și 
+   gestionarea 
+   datelor. 
+
+Aflați mai multe detalii despre SQL din 
+ surse de informații 
+ diverse:
+* [W3schools SQL Tutorial](
+  w3schools.com/sqL/default.asp)
+ * [TutorialsPoint SQL Tutorial](
+   tutorialspoint.com/sql/index.htm )
+ * [Udemy Curs de baze de date SQL]( 
+  udemy.com/course
+  /baze_de_date_sql/ )
+  ",SQL este un limbaj de interogare a bazelor de date.,0.09999999999,1.0,0.8971668287611604,,0.053357059608616225,0.06293706293706293,
+1,Care este sintaxa de bază a unei interogări SELECT?,"['copyright@www.adrian.runceanu.ro \nSubcereri corelate  \n \n• O subinterogare corelata este o subinterogare \ncare se executa o data pentru fiecare linie \nconsiderata de interogarea principala si care la \nexecutie foloseste o valoare dintr-o coloana \ndin interogarea exterioara.', 'copyright@www.adrian.runceanu.ro \nFuncţii referitoare la o singură înregistrare \nFuncţiile referitoare la o singură înregistrare pot fi \nfolosite în: \n \na) clauza SELECT - pentru a modifica modul de \nafişare a datelor, pentru a realiza diferite calcule, \netc.', 'copyright@www.adrian.runceanu.ro \nConcluzii \n1. O subinterogare este o instructiune SELECT \ninclusa într-o clauza a altei instructiuni SQL.  \n2. Subinterogarile sunt folositoare atunci cînd \ninterogarea se bazeaza pe criterii necunoscute. \n3. Subinterogarile au urmatoarele caracteristici:', '• Ea se poate identifica prin folosirea unei \ncoloane a interogarii exterioare in clauza \noperatorului interogarii interioare.  \nCurs 6 - BAZE DE DATE 56', 'operaţiile ce urmează.  \n• Dacă o cerere SQL este concepută să elimine \nînregistrări/grupuri doar folosind clauza HAVING, \natunci ar fi bine de încercat dacă este posibil şi prin \nclauza WHERE. De obicei, totuşi, această rescriere nu \nva fi posibilă.  \nCurs 5 - BAZE DE DATE 50', 'copyright@www.adrian.runceanu.ro \n6. SUBQUERIES (Subinterogari) \n\uf0d8Într-o instrucţiune SELECT se poate folosi o singură clauză \nORDER BY şi, dacă se foloseşte, trebuie să fie ultima clauza a \ninterogării principale. \n \n\uf0d8Un subquery nu poate avea propria clauză ORDER BY.', 'copyright@www.adrian.runceanu.ro \n6. SUBQUERIES (Subinterogari) \n  În SQL, subinterogările ne permit să aflăm o \ninformaţie care ne este necesară pentru a \nobţine informaţia pe care o vrem. \n \n\uf0d8O subinterogare (subquery) este o instrucţiune \nSELECT care este inclusă în clauza unei alte', 'De asemenea se pot face interogări din \ntabele diferite. \nCurs 6 - BAZE DE DATE 13', 'copyright@www.adrian.runceanu.ro \n6.1. SINGLE ROW SUBQUERIES \n• Subinterogările pot fi plasate şi în clauza HAVING.  \n• Deoarece clauza HAVING are întotdeauna o condiţie de grup, şi \nsubinterogarea va avea aproape întotdeauna o condiţie de grup. \nCurs 6 - BAZE DE DATE 22', 'În cazul în care WHERE lipseste, toate liniile \ntabelei FROM vor avea o linie corespondenta în \nrezultatul cererii. \n  Linia de rezultat este compusa pe baza listei \nde expresii aflata pe clauza SELECT. \nCurs - Baze de date 5']","## Sintaxa de bază a interogării SELECT:
+
+O interogare SELECT este o instrucțiune SQL care permite extragerea datelor dintr-o bază de date. Sintaxa de bază are următoarele componente:
+
+**1. CLAUZA SELECT:**
+
+* Specifică coloanele pe care doriți să le extrageți.
+* Se folosește sintaxa `SELECT coloana1, coloana2, ...`
+
+
+**2. CLAUZA FROM:**
+
+* Specifică din ce tabel(e) doriți să extrageți datele.
+* Se folosește sintaxa `FROM tabel1, tabel2, ...`
+
+
+**3. CLAUZA WHERE (opțională):**
+
+* Specifică condițiile pe care trebuie să le îndeplinească datele pentru a fi selectate.
+* Se folosește sintaxa `WHERE condiție`
+
+
+**Exemplu:**
+
+```sql
+SELECT nume, prenume, varsta
+FROM angajati
+WHERE varsta > 25;
+```
+
+Acestă interogare va extrage numele, prenumele și vârsta angajaților din tabelul ""angajati"" care au vârsta mai mare de 25 de ani.
+
+**Resurse suplimentare:**
+
+* https://www.w3schools.com/sql/sql_select.asp
+* https://www.tutorialspoint.com/sql/sql-select-query.htm
+* https://www.vertabelo.com/blog/tutorial/sql-select-statement/
+
+
+**Note:**
+
+* Pot fi folosite clauze suplimentare precum `JOIN`, `GROUP BY`, `ORDER BY`, dar acestea necesită explicații mai avansate.
+* Sintaxa poate varia ușor în funcție de tipul bazei de date.
+
+**Nu am putut oferi informații mai specifice despre subinterogări deoarece contextul nu conține materiale relevante.**
+",SELECT [DISTINCT] lista_de_expresii FROM nume_tabela WHERE conditie_linie ORDER BY criterii_sortare_rezultat;,,0.0,0.8825776352450868,,0.017946164267667562,0.06167400881057269,
+2,Ce face clauza WHERE într-o interogare SQL?,"['operaţiile ce urmează.  \n• Dacă o cerere SQL este concepută să elimine \nînregistrări/grupuri doar folosind clauza HAVING, \natunci ar fi bine de încercat dacă este posibil şi prin \nclauza WHERE. De obicei, totuşi, această rescriere nu \nva fi posibilă.  \nCurs 5 - BAZE DE DATE 50', 'copyright@www.adrian.runceanu.ro \nLimbajul SQL \nInterogări SELECT pe o singură tabelă \n \n3.1. SELECT. Sintaxa. Efect. Rezultat \n3.2. Lista SELECT \n3.3. Clauza WHERE \n3.4. Clauza ORDER BY \nCurs - Baze de date 3', 'copyright@www.adrian.runceanu.ro \nLimbajul SQL \n \nCereri SELECT pe o tabelă \n \n3.1. SELECT. Sintaxa. Efect. Rezultat \n3.2. Lista SELECT \n3.3. Clauza WHERE \n3.4. Clauza ORDER BY \nCurs - Baze de date 20', 'copyright@www.adrian.runceanu.ro \nLimbajul SQL \n \nCereri SELECT pe o tabelă \n \n3.1. SELECT. Sintaxa. Efect. Rezultat \n3.2. Lista SELECT \n3.3. Clauza WHERE \n3.4. Clauza ORDER BY \nCurs - Baze de date 69', 'copyright@www.adrian.runceanu.ro \nLimbajul SQL \n \nCereri SELECT pe o tabelă \n \n3.1. SELECT. Sintaxa. Efect. Rezultat \n3.2. Lista SELECT \n3.3. Clauza WHERE \n3.4. Clauza ORDER BY \nCurs - Baze de date 9', 'copyright@www.adrian.runceanu.ro \nLimbajul SQL \nInterogări SELECT pe o singură tabelă (partea II) \n \n4.1. Funcţii \n4.2. Funcţii referitoare la o singură înregistrare \n \nCurs 4 - BAZE DE DATE 3', 'copyright@www.adrian.runceanu.ro \nLimbajul SQL \nInterogări SELECT pe o singură tabelă (partea II) \n \n4.2. Funcţii referitoare la o singură înregistrare \n 4.2.1. Funcţii pentru şiruri de caractere \n 4.2.2. Funcţii de tip numeric \n 4.2.3. Funcţii de tip dată calendaristică şi oră', 'copyright@www.adrian.runceanu.ro \nLimbajul SQL \nInterogări SELECT pe o singură tabelă (partea II) \n \n4.2. Funcţii referitoare la o singură înregistrare \n 4.2.1. Funcţii pentru şiruri de caractere \n 4.2.2. Funcţii de tip numeric \n 4.2.3. Funcţii de tip dată calendaristică şi oră', 'copyright@www.adrian.runceanu.ro \nLimbajul SQL \nInterogări SELECT pe o singură tabelă (partea II) \n \n4.2. Funcţii referitoare la o singură înregistrare \n 4.2.1. Funcţii pentru şiruri de caractere \n 4.2.2. Funcţii de tip numeric \n 4.2.3. Funcţii de tip dată calendaristică şi oră', 'copyright@www.adrian.runceanu.ro \nLimbajul SQL \nInterogări SELECT pe o singură tabelă (partea II) \n \n4.2. Funcţii referitoare la o singură înregistrare \n 4.2.1. Funcţii pentru şiruri de caractere \n 4.2.2. Funcţii de tip numeric \n 4.2.3. Funcţii de tip dată calendaristică şi oră']","## Ce face clauza WHERE într-o interogare SQL?
+
+O clauză `WHERE` este un filtru pe care il poți include in interogarile tale SQL pentru a selecta doar inregistrari specifice dintr-un tabel. 
+In esenta, ii spui bazei de date: ""Vreau sa vezi toate inregistrarile din acest tabel, dar doar pe cele care indeplinesc aceasta conditie"". Aceasta conditie poate fi o comparatie, o functie sau o combinatie a acestora.
+
+**Iata cateva exemple de clauze `WHERE`:**
+
+* **Selecteaza toate inregistrarile cu numele ""Andrei"":**
+
+```sql
+SELECT * FROM clienti WHERE nume = ""Andrei"";
+```
+
+* **Selecteaza toate inregistrarile cu varsta mai mare de 18 ani:**
+
+```sql
+SELECT * FROM clienti WHERE varsta > 18;
+```
+
+* **Selecteaza toate inregistrarile cu un sold al contului mai mare de 1000 de lei:**
+
+```sql
+SELECT * FROM clienti WHERE sold_cont > 1000;
+```
+
+Poti de asemenea sa combini mai multe conditii folosind operatorii **SI/SAU**:
+
+* **Selecteaza toate inregistrarile cu numele ""Andrei"" SI varsta mai mare de 18 ani:**
+
+```sql
+SELECT * FROM clienti WHERE nume = ""Andrei"" SI varsta > 18;
+```
+
+* **Selecteaza toate inregistrarile cu numele ""Andrei"" SAU varsta mai mare de 18 ani:**
+
+```sql
+SELECT * FROM clienti WHERE nume = ""Andrei"" SAU varsta > 18;
+```
+
+**Utilizarea clauzei `WHERE` este cruciala pentru a filtra inregistrarile dintr-un tabel si a selecta doar datele de care ai nevoie.**
+
+
+",Clauza WHERE restricționează rândurile returnate la cele care îndeplinesc condiția specificată.,0.0,0.0,0.8550748764024009,,0.012557690800697192,0.03636363636363636,0.44
+3,Care este efectul utilizării DISTINCT într-o interogare?,"['• Ea se poate identifica prin folosirea unei \ncoloane a interogarii exterioare in clauza \noperatorului interogarii interioare.  \nCurs 6 - BAZE DE DATE 56', 'copyright@www.adrian.runceanu.ro \nSubcereri corelate  \n \n• O subinterogare corelata este o subinterogare \ncare se executa o data pentru fiecare linie \nconsiderata de interogarea principala si care la \nexecutie foloseste o valoare dintr-o coloana \ndin interogarea exterioara.', 'rezultat este egal cu numarul liniilor din tabela \ncare îndeplinesc conditia WHERE sau, când \nclauza respectiva lipseste, cu numarul total de \nlinii din tabela. \nCurs - Baze de date 7', 'exterioară va returna liniile care se potrivesc cu valorile \nnon-null. \n• Dacă este folosit operatorul ALL, interogarea exterioară \nnu va returna nimic. \nCurs 6 - BAZE DE DATE 35', 'copyright@www.adrian.runceanu.ro \nExercitii \nSe considera tabela EMP avand urmatoarea structura: \n \n \n \n \nsi avand urmatoarele valori introduse:  \nCurs - Baze de date 82', '\uf0d8Singura limită a numărului de interogări este dimensiunea \nbuffer-ului folosit de interogare. \n \n\uf0d8Dacă subinterogarea returnează null sau nu returneaza nici o \nlinie, atunci interogarea exterioară nu va returna nimic. \nCurs 6 - BAZE DE DATE 8', 'copyright@www.adrian.runceanu.ro \nREZULTAT \n  Numarul coloanelor din rezultat este egal cu \nnumarul expresiilor din lista aflata pe clauza \nSELECT.  \n  Aceste expresii dau si numele coloanelor din \nrezultat. \n  În lipsa clauzei DISTINCT, numarul de linii din', 'copyright@www.adrian.runceanu.ro \n Operatorul ANY (sinonim operatorului SOME) \ncompara o valoare cu fiecare valoare din cele \nreturnate de subinterogare. \n \nAstfel,  \n < ANY inseamna mai mic decat maximul  \n ANY inseamna mai mare decat minimul \n = ANY este echivalent cu IN \nCurs 6 - BAZE DE DATE 49', 'este egala cu valoarei_1, atunci va returna valoarei_2. \nDaca nici una din valorile valoare1_1, valoare2_1, …, \nvaloaren_1 nu este egala cu expresie, atunci va \nreturna valoare. \nCurs 4 - BAZE DE DATE 107', 'copyright@www.adrian.runceanu.ro \nValori de NULL intr-o subinterogare  \n \n• In cazul in care subinterogarea returneaza \nvreuna din valori NULL si interogarea \nprincipala are operator NOT IN, atunci \ninterogarea principala nu va returna niciun \nrand.']","Funcția `DISTINCT` se folosește pentru a elimina rândurile duplicate dintr-un set de rezultate. Această funcție se folosește în clauza `SELECT` a unei instrucțiuni SQL.
+
+
+De exemplu, următoarea instrucțiune SQL va selecta toate numele de angajați din tabela `angajati`, eliminând orice duplicate:
+
+```sql
+SELECT DISTINCT nume FROM angajati;
+```
+
+Acest lucru are ca rezultat un set de rezultate care conține doar un singur rând pentru fiecare nume de angajat unic din tabela `angajati`.
+
+
+Funcția `DISTINCT` poate fi, de asemenea, utilizată cu alte clauze SQL, cum ar fi `GROUP BY` și `HAVING`. De exemplu, următoarea instrucțiune SQL va selecta numărul de angajați din fiecare departament, eliminând orice duplicate:
+
+```sql
+SELECT departament, COUNT(DISTINCT nume) AS numar_angajati
+FROM angajati
+GROUP BY departament;
+```
+
+Acest lucru are ca rezultat un set de rezultate care conține un singur rând pentru fiecare departament, cu numărul de angajați din acel departament.",DISTINCT elimină rândurile duplicat din rezultatul interogării.,0.0,0.0,0.8301506612027808,,0.031251907639724415,0.045714285714285714,
+4,Ce face clauza ORDER BY?,"['copyright@www.adrian.runceanu.ro \nEFECT \n  Daca exista cuvântul cheie DISTINCT, din \nrezultat se elimina liniile duplicat. \n  Înainte de a trimite rezultatul, serverul îl \nsorteaza în functie de criteriile specificate de \nclauza ORDER BY. \n  În cazul în care ORDER BY lipseste, liniile din', 'copyright@www.adrian.runceanu.ro \nClauza ORDER BY \n\uf0d8 Rezultatul obtinut - Listaţi toţi angajaţii ordonându-i după \ndata de angajare, salariu şi comision (în ordine crescătoare).  \nCurs - Baze de date 79', 'copyright@www.adrian.runceanu.ro \nClauza ORDER BY \n\uf0d8În clauza ORDER BY se pot folosi coloane care nu sunt \nconţinute în SELECT. \n  \nExemplu:  \n  Listaţi toţi angajaţii ordonându-i după salariu (în \nordine crescătoare). \n \nSELECT ename, job \nFROM EMP \nORDER BY sal;   \nCurs - Baze de date 80', 'ORDER BY este obligatorie în cazul în care se \ndoreste un rezultat sortat dupa anumite criterii. \nCurs - Baze de date 8', 'b) clauza WHERE - pentru a scrie conditia pe baza \ncareia se afişează înregistrările(liniile)  \n \nc) clauza ORDER BY- pentru a afisa datele pe baza \nunor criterii de sortare \nCurs 4 - BAZE DE DATE 14', 'copyright@www.adrian.runceanu.ro \nLimbajul SQL \n \nCereri SELECT pe o tabelă \n \n3.1. SELECT. Sintaxa. Efect. Rezultat \n3.2. Lista SELECT \n3.3. Clauza WHERE \n3.4. Clauza ORDER BY \nCurs - Baze de date 69', 'copyright@www.adrian.runceanu.ro \nLimbajul SQL \n \nCereri SELECT pe o tabelă \n \n3.1. SELECT. Sintaxa. Efect. Rezultat \n3.2. Lista SELECT \n3.3. Clauza WHERE \n3.4. Clauza ORDER BY \nCurs - Baze de date 20', 'copyright@www.adrian.runceanu.ro \nLimbajul SQL \n \nCereri SELECT pe o tabelă \n \n3.1. SELECT. Sintaxa. Efect. Rezultat \n3.2. Lista SELECT \n3.3. Clauza WHERE \n3.4. Clauza ORDER BY \nCurs - Baze de date 9', 'copyright@www.adrian.runceanu.ro \n6. SUBQUERIES (Subinterogari) \n\uf0d8Într-o instrucţiune SELECT se poate folosi o singură clauză \nORDER BY şi, dacă se foloseşte, trebuie să fie ultima clauza a \ninterogării principale. \n \n\uf0d8Un subquery nu poate avea propria clauză ORDER BY.', 'copyright@www.adrian.runceanu.ro \nClauza ORDER BY \n\uf0d8 Rândurile mai pot fi ordonate şi după mai multe coloane.  \n\uf0d8 Numărul de coloane după care se pot ordona rândurile \nîntoarse este numărul maxim de coloane existente în tabelă.  \nExemplu  \n Listaţi toţi angajaţii ordonându-i după data de angajare,']","Regret, dar contextul furnizat nu conţine informaţii despre clauza ""ORDER BY"". Prin urmare, nu pot răspunde la întrebarea ""Ce face clauza ORDER BY?"".",Clauza ORDER BY sortează rezultatele în funcție de coloanele specificate.,0.9095238095108164,,0.0,,0.05679677445135579,0.16216216216216214,
+5,Ce este o funcție în SQL?,"['copyright@www.adrian.runceanu.ro \nFuncţii \n  O observaţie importanta este faptul că dacă se \napelează o funcţie SQL ce are un argument (parametru) \negal cu valoarea Null, atunci în mod automat rezultatul \nva avea valoarea Null.  \n  Singurele funcţii care nu respectă această regulă \nsunt:  \n– CONCAT', 'copyright@www.adrian.runceanu.ro \nFuncţii \n  O observaţie importanta este faptul că dacă se \napelează o funcţie SQL ce are un argument (parametru) \negal cu valoarea Null, atunci în mod automat rezultatul \nva avea valoarea Null.  \n  Singurele funcţii care nu respectă această regulă \nsunt:  \n– CONCAT', 'copyright@www.adrian.runceanu.ro \nLimbajul SQL \nInterogări SELECT pe o singură tabelă (partea II) \n \n4.2. Funcţii referitoare la o singură înregistrare \n 4.2.1. Funcţii pentru şiruri de caractere \n 4.2.2. Funcţii de tip numeric \n 4.2.3. Funcţii de tip dată calendaristică şi oră', 'copyright@www.adrian.runceanu.ro \nLimbajul SQL \nInterogări SELECT pe o singură tabelă (partea II) \n \n4.2. Funcţii referitoare la o singură înregistrare \n 4.2.1. Funcţii pentru şiruri de caractere \n 4.2.2. Funcţii de tip numeric \n 4.2.3. Funcţii de tip dată calendaristică şi oră', 'copyright@www.adrian.runceanu.ro \nLimbajul SQL \nInterogări SELECT pe o singură tabelă (partea II) \n \n4.2. Funcţii referitoare la o singură înregistrare \n 4.2.1. Funcţii pentru şiruri de caractere \n 4.2.2. Funcţii de tip numeric \n 4.2.3. Funcţii de tip dată calendaristică şi oră', 'copyright@www.adrian.runceanu.ro \nLimbajul SQL \nInterogări SELECT pe o singură tabelă (partea II) \n \n4.2. Funcţii referitoare la o singură înregistrare \n 4.2.1. Funcţii pentru şiruri de caractere \n 4.2.2. Funcţii de tip numeric \n 4.2.3. Funcţii de tip dată calendaristică şi oră', 'copyright@www.adrian.runceanu.ro \nLimbajul SQL \nInterogări SELECT pe o singură tabelă (partea II) \n \n4.2. Funcţii referitoare la o singură înregistrare \n 4.2.1. Funcţii pentru şiruri de caractere \n 4.2.2. Funcţii de tip numeric \n 4.2.3. Funcţii de tip dată calendaristică şi oră', 'copyright@www.adrian.runceanu.ro \nLimbajul SQL \nInterogări SELECT pe o singură tabelă (partea II) \n \n4.2. Funcţii referitoare la o singură înregistrare \n 4.2.1. Funcţii pentru şiruri de caractere \n 4.2.2. Funcţii de tip numeric \n 4.2.3. Funcţii de tip dată calendaristică şi oră', 'operaţiile ce urmează.  \n• Dacă o cerere SQL este concepută să elimine \nînregistrări/grupuri doar folosind clauza HAVING, \natunci ar fi bine de încercat dacă este posibil şi prin \nclauza WHERE. De obicei, totuşi, această rescriere nu \nva fi posibilă.  \nCurs 5 - BAZE DE DATE 50', 'copyright@www.adrian.runceanu.ro \nLimbajul SQL \nInterogări SELECT pe o singură tabelă (partea II) \n \n4.1. Funcţii \n4.2. Funcţii referitoare la o singură înregistrare \n \nCurs 4 - BAZE DE DATE 3']","## Ce este o funcție în SQL?
+
+O funcție în SQL este un bloc de cod care efectuează o anumită operație și returnează o valoare. Funcțiile din SQL pot fi clasificate în funcție de scopul lor, de exemplu:
+
+**Funcții pentru calcule:** Aceste funcții permit efectuarea de operații matematice pe date numerice. De exemplu, funcția `SUM()` calculează suma unui set de valori, `AVG()` calculează media, iar `MAX()` identifică valoarea maximă.
+
+**Funcții pentru siruri de caractere:** Aceste funcții permit manipularea sirurilor de caractere. De exemplu, funcția `SUBSTRING()` extrage o parte dintr-un sir de caractere, `LENGTH()` calculează lungimea unui sir de caractere, iar `UPPER()` convertește un sir de caractere în majuscule.
+
+**Funcții pentru data și ora:** Aceste funcții permit manipularea datelor și a timpului. De exemplu, funcția `DATE()` extrage data din data și ora, `TIME()` extrage ora din data și ora, iar `DATEDIFF()` calculează diferența între două date.
+
+**Funcții pentru agregare:** Aceste funcții permit calcularea valorilor agregate pe grupuri de date. De exemplu, funcția `GROUP BY()` grupează datele în funcție de o anumită coloană, iar `COUNT()` numără numărul de rânduri din fiecare grup.
+
+**Funcții scalare:** Aceste funcții returnează un singur rezultat pe rând. De exemplu, funcția `UPPER()` convertește un singur sir de caractere în majuscule.
+
+**Funcții de tabel:** Aceste funcții returnează un tabel cu rezultate. De exemplu, funcția `CROSS JOIN()` combină toate rândurile din două tabele.
+
+**Observații importante:**
+
+* O funcție SQL ce are un argument egal cu valoarea Null, va avea automat rezultatul Null.
+* Excepție fac funcțiile:
+    * `CONCAT()`: Concatenează mai multe siruri de caractere.
+    * `COALESCE()`: Returnează primul argument care nu este Null.
+    * `ISNULL()`: Verifică dacă argumentul este Null.
+
+**Resurse utile:**
+
+* https://www.w3schools.com/sql/sql_functions.asp
+* https://www.tutorialsteacher.com/sqlserver/sqlserver-functions
+* https://www.geeksforgeeks.org/sql-functions/
+
+**Exemple de utilizare a funcțiilor:**
+
+```sql
+-- Calcularea sumei comenzilor pentru fiecare client
+SELECT * FROM (
+    SELECT CustomerID, SUM(OrderAmount) AS TotalAmount
+    FROM Orders
+    GROUP BY CustomerID
+) AS CustomerOrders
+ORDER BY TotalAmount DESC;
+
+-- Extrage primele 10 caractere din descrierea produsului
+SELECT * FROM Products
+WHERE SUBSTRING(Description, 1, 10) = 'Apple';
+
+-- Verifică dacă data comenzii este între 01/01/2023 și 31/03/2023
+SELECT * FROM Orders
+WHERE OrderDate BETWEEN '2023-01-01' AND '2023-03-31';
+
+-- Numără numărul de comenzi pentru fiecare categorie de produs
+SELECT CategoryID, COUNT(*) AS OrderCount
+FROM Orders
+JOIN Products ON Orders.ProductID = Products.ProductID
+GROUP BY CategoryID;
+```","Funcțiile sunt utilizate pentru a realiza calcule asupra datelor, a modifica date și a manipula grupuri de înregistrări.",0.0,,0.8851549921096812,,0.016504045595709425,0.049217002237136466,
+6,Ce tipuri de funcții există în SQL?,"['copyright@www.adrian.runceanu.ro \nFuncţii \n  O observaţie importanta este faptul că dacă se \napelează o funcţie SQL ce are un argument (parametru) \negal cu valoarea Null, atunci în mod automat rezultatul \nva avea valoarea Null.  \n  Singurele funcţii care nu respectă această regulă \nsunt:  \n– CONCAT', 'copyright@www.adrian.runceanu.ro \nFuncţii \n  O observaţie importanta este faptul că dacă se \napelează o funcţie SQL ce are un argument (parametru) \negal cu valoarea Null, atunci în mod automat rezultatul \nva avea valoarea Null.  \n  Singurele funcţii care nu respectă această regulă \nsunt:  \n– CONCAT', 'copyright@www.adrian.runceanu.ro \nLimbajul SQL \nInterogări SELECT pe o singură tabelă (partea II) \n \n4.2. Funcţii referitoare la o singură înregistrare \n 4.2.1. Funcţii pentru şiruri de caractere \n 4.2.2. Funcţii de tip numeric \n 4.2.3. Funcţii de tip dată calendaristică şi oră', 'copyright@www.adrian.runceanu.ro \nLimbajul SQL \nInterogări SELECT pe o singură tabelă (partea II) \n \n4.2. Funcţii referitoare la o singură înregistrare \n 4.2.1. Funcţii pentru şiruri de caractere \n 4.2.2. Funcţii de tip numeric \n 4.2.3. Funcţii de tip dată calendaristică şi oră', 'copyright@www.adrian.runceanu.ro \nLimbajul SQL \nInterogări SELECT pe o singură tabelă (partea II) \n \n4.2. Funcţii referitoare la o singură înregistrare \n 4.2.1. Funcţii pentru şiruri de caractere \n 4.2.2. Funcţii de tip numeric \n 4.2.3. Funcţii de tip dată calendaristică şi oră', 'copyright@www.adrian.runceanu.ro \nLimbajul SQL \nInterogări SELECT pe o singură tabelă (partea II) \n \n4.2. Funcţii referitoare la o singură înregistrare \n 4.2.1. Funcţii pentru şiruri de caractere \n 4.2.2. Funcţii de tip numeric \n 4.2.3. Funcţii de tip dată calendaristică şi oră', 'copyright@www.adrian.runceanu.ro \nLimbajul SQL \nInterogări SELECT pe o singură tabelă (partea II) \n \n4.2. Funcţii referitoare la o singură înregistrare \n 4.2.1. Funcţii pentru şiruri de caractere \n 4.2.2. Funcţii de tip numeric \n 4.2.3. Funcţii de tip dată calendaristică şi oră', 'copyright@www.adrian.runceanu.ro \nLimbajul SQL \nInterogări SELECT pe o singură tabelă (partea II) \n \n4.2. Funcţii referitoare la o singură înregistrare \n 4.2.1. Funcţii pentru şiruri de caractere \n 4.2.2. Funcţii de tip numeric \n 4.2.3. Funcţii de tip dată calendaristică şi oră', 'copyright@www.adrian.runceanu.ro \nFuncţii \n  Funcţiile sunt o caracteristică importantă a \nSQL si sunt utilizate pentru: \n \n\uf0fca realiza calcule asupra datelor \n\uf0fca modifica date \n\uf0fca manipula grupuri de înregistrări  \n\uf0fca schimba formatul datelor  \n\uf0fcsau pentru a converti diferite tipuri de date', 'copyright@www.adrian.runceanu.ro \n4.2.5. Funcţii generale \n\uf0d8SGBD-ul ORACLE pune la dispozitia \nprogramatorilor, in cadrul limbajului SQL, o \nfunctie si o expresie conditionala.  \n \n\uf0d8Acestea sunt alternative foarte bune la \nstructurile de tip IF-THEN-ELSE.  \n\uf0d8Functia se numeste DECODE, iar expresia']","## Tipuri de funcții în SQL
+
+Există o varietate de funcții disponibile în SQL, care pot fi grupate în funcție de scopul lor:
+
+**1. Funcții referitoare la o singură înregistrare**
+
+Acestea operează pe un singur rând din tabelul dvs., prelucrând datele din acel rând. Se împart în:
+
+- **Funcții pentru șiruri de caractere:** manipulează textul, de ex. `SUBSTRING`, `LOWER`
+- **Funcții numerice:** calculează valori numerice, ex. `ABS`, `SQRT`
+- **Funcții de date calendaristice și oră:** prelucrează date și ore, ex. `NOW`, `DATE_ADD`
+
+**2. Funcții de agregare**
+
+Aceste funcții operează pe un grup de rânduri și calculează o singură valoare care rezumă acel grup. Exemple includ `COUNT`, `SUM` și `AVG`.
+
+**3. Funcții generale**
+
+Acestea îndeplinesc diverse sarcini, incluzând:
+
+- Concatenarea șirurilor de caractere: de ex., `CONCAT`.
+- Luarea deciziilor: ex., `DECODE` (Oracle) sau `CASE WHEN ... END`.
+- Generarea unor secvențe numerice: ex., `ROW_NUMBER` (nu în toate dialectele SQL).
+- Extracții de text din diverse surse: ex., `JSON_EXTRACT` (nu în toate dialectele SQL).
+
+**4. Funcții specifice dialectului SQL**
+
+Unele funcții sunt specific unui anumit sistem de gestionare a bazelor de date, de ex. funcții geografice în PostgreSQL sau funcții JSON în SQL Server.
+
+Pentru o prezentare mai detaliată a tipurilor de funcții și exemple specifice, vă recomand să consultați manualul sau documentația relevantă pentru sistemul dvs. de gestionare a bazelor de date.
+",Există funcții pentru o singură înregistrare și funcții pentru mai multe înregistrări (funcții de grup).,0.0,,0.8842343090883166,0.35714285714285715,0.019240848598265397,0.10852713178294572,
+7,Care sunt principalele funcții pentru șiruri de caractere?,"['4.2.1. Funcţii pentru şiruri de caractere', 'copyright@www.adrian.runceanu.ro \nSubcereri corelate  \n \n• O subinterogare corelata este o subinterogare \ncare se executa o data pentru fiecare linie \nconsiderata de interogarea principala si care la \nexecutie foloseste o valoare dintr-o coloana \ndin interogarea exterioara.', 'copyright@www.adrian.runceanu.ro \n\uf0d8Spre deosebire de alte funcţii, funcţiile \ncaracter pot fi imbricate până la orice \nadâncime.  \n\uf0d8Dacă funcţiile sunt imbricate, atunci ele sunt \nevaluate din interior spre exterior.  \n \n\uf0d8Pentru a determina, de exemplu, de câte ori', 'copyright@www.adrian.runceanu.ro \nRezultat obtinut:  \n \nCurs 4 - BAZE DE DATE 23 \n4.2.1. Funcţii pentru şiruri de caractere', '• Ea se poate identifica prin folosirea unei \ncoloane a interogarii exterioare in clauza \noperatorului interogarii interioare.  \nCurs 6 - BAZE DE DATE 56', ""înlocui cu primul caracter (adică tot cu caracterul 'D') din cel de-al \ntreilea argument al funcţiei (şirul de caractere 'D'), apoi va căuta \ncel de-al doilea caracter, adică caracterul 'A', şi îl va şterge din \ncâmpul nume deoarece acesta nu are caracter corespondent în"", '4. Listaţi toţi angajaţii care nu au manager.  \nCurs - Baze de date 83', 'copyright@www.adrian.runceanu.ro \nRezultat obtinut:  \nCurs 4 - BAZE DE DATE 21 \n4.2.1. Funcţii pentru şiruri de caractere', 'copyright@www.adrian.runceanu.ro \nRezultatul obtinut: \nCurs 4 - BAZE DE DATE 25 \n4.2.1. Funcţii pentru şiruri de caractere', 'copyright@www.adrian.runceanu.ro \nRezultatul obtinut: \nCurs 4 - BAZE DE DATE 27 \n4.2.1. Funcţii pentru şiruri de caractere']","## Principalele funcții pentru șiruri de caractere:
+
+**Funcții de interogare:**
+
+* **`LENGTH(șir)`:** Returnează lungimea șirului de caractere `șir`.
+* **`SUBSTRING(șir, start, length)`:** Returnează un substring cu `length` caractere din `șir`, începând de la poziția `start`.
+* **`LOCATE(substring, șir, start)`:** Returnează poziția primei apariții a `substring` în `șir`, începând de la poziția `start`.
+* **`INSTR(șir, substring, start)`:** Equivalează cu `LOCATE`.
+* **`FIND_IN_SET(substring, șir_listă)`:** Returnează poziția `substring` în lista delimitată prin virgule `șir_listă`, sau 0 dacă `substring` nu este găsit.
+
+**Funcții de manipulare:**
+
+* **`TRIM(șir)`:** Returnează `șir` cu spațiile goale eliminate de la început și final.
+* **`LTRIM(șir)`:** Returnează `șir` cu spațiile goale eliminate de la început.
+* **`RTRIM(șir)`:** Returnează `șir` cu spațiile goale eliminate de la final.
+* **`REPLACE(șir, substring1, substring2)`:** Returnează `șir` cu toate aparițiile `substring1` înlocuite cu `substring2`.
+* **`SUBSTRING_INDEX(șir, delim, count)`:** Returnează un substring din `șir` delimitat de `delim`, cu numărul `count` de apariții ale lui `delim`.
+* **`SPLIT(șir, delim)`:** Returnează un array cu subșirurile din `șir` delimitate de `delim`.
+
+**Funcții de conversie:**
+
+* **`CAST(șir AS signed_integer)`:** Converteste `șir` la un număr întreg semnat.
+* **`CAST(șir AS unsigned_integer)`:** Converteste `șir` la un număr întreg nesemnat.
+* **`CAST(șir AS decimal)`:** Converteste `șir` la un număr zecimal.
+* **`CAST(șir AS date)`:** Converteste `șir` la un date.
+* **`CAST(șir AS datetime)`:** Converteste `șir` la un datetime.
+* **`LPAD(șir, lungime, caracter_de_umplere)`:** Adaugă caractere la începutul lui `șir` până la lungimea `lungime` utilizând `caracter_de_umplere` ca umplutură.
+* **`RPAD(șir, lungime, caracter_de_umplere)`:** Adaugă caractere la finalul lui `șir` până la lungimea `lungime` utilizând `caracter_de_umplere` ca umplutură.
+
+**Funcții speciale:**
+
+* **`CONCAT(șir1, șir2, ...)`:** Concatenează șirurile `șir1`, `șir2`, ... etc.
+* **`COALESCE(șir1, șir2, ...)`:** Returnează primul șir din listă care nu este NULL.
+* **`CONCAT_WS(separator, șir1, șir2, ...)`:** Concatenează șirurile `șir1`, `șir2`, ... etc., separându-le cu `separator`.
+
+**Exemplu:**
+
+```sql
+-- Contorizează câte angajați au numele cu lungime mai mare de 5 caractere
+SELECT COUNT(*)
+FROM Angajati
+WHERE LENGTH(Nume) > 5;
+```
+
+Este important de menționat că numele funcțiilor și sintaxa exactă pot varia în funcție de sistemul bazei de date folosit.","LOWER, UPPER, INITCAP, CONCAT, SUBSTR, LENGTH, INSTR, REPLACE.",0.0,0.0,0.8103003123343712,0.0,0.001062208358542398,0.020833333333333336,0.07
+8,Ce face funcția LENGTH?,"['copyright@www.adrian.runceanu.ro \nExemplu de utilizare a \nfuncţiei LENGTH: \n \n \nSELECT LENGTH(ename)  \nFROM EMP;  \nCurs 4 - BAZE DE DATE 18 \n4.2.1. Funcţii pentru şiruri de caractere', 'copyright@www.adrian.runceanu.ro \nExemplu de utilizare a funcţiei LENGTH – rezultatul \nobtinut:  \nCurs 4 - BAZE DE DATE 19 \n4.2.1. Funcţii pentru şiruri de caractere', 'copyright@www.adrian.runceanu.ro \n4.3. Funcții de grup \nExemplul 7 - Comisionul mediu în departamentul 30 \n(ignorând sau nu valorile nule):  \nSELECT AVG(comm), AVG(NVL(comm, 0)) \nFROM EMP \nWHERE deptno = 30; \nCurs 5 - BAZE DE DATE 29', ""copyright@www.adrian.runceanu.ro \nSELECT ename, LENGTH (ename) - LENGTH (TRANSLATE(ename, 'DA', \n'D'))  \nFROM EMP; \nCurs 4 - BAZE DE DATE 29 \n4.2.1. Funcţii pentru şiruri de caractere"", 'copyright@www.adrian.runceanu.ro \nLISTA SELECT \n Alias de coloana: \n  Nu poate fi mai lung de 30 de caractere. \n  Începe cu o litera, contine numai litere, cifre, _, # si \n$ sau e pus intre ghilimele (tot max. 30 caractere intre \nghilimele).', 'copyright@www.adrian.runceanu.ro \n4.3.2. Excluderea grupurilor  \n(clauza HAVING) \nRezultatul obtinut - Salariul mediu pe fiecare departament unde \nacesta depăşeşte 2000$.  \nCurs 5 - BAZE DE DATE 43', 'copyright@www.adrian.runceanu.ro \nClauza WHERE \n 3. LIKE  \n  Dacă nu se cunoaşte valoarea exactă căutată, cu ajutorul \ncondiţiei LIKE putem să selectăm rândurile care se potrivesc \ncu un model specificat de caractere.  \n \n  Operaţia de căutare după un model poate fi asemănată', 'copyright@www.adrian.runceanu.ro \n4.3.1. Clauza GROUP BY \nRezultatul obtinut - Salariul mediu pe fiecare departament, iar \nrezultatele ordonate după salariul mediu pe departament.  \nCurs 5 - BAZE DE DATE 36', 'copyright@www.adrian.runceanu.ro \n4.3.1. Clauza GROUP BY \nRezultatul obtinut - Salariul total pe fiecare departament si pe \nfiecare functie, iar rezultatele ordonate după salariul mediu pe \ndepartament.  \n \nCurs 5 - BAZE DE DATE 39', 'copyright@www.adrian.runceanu.ro \nExemplu: \n  Pentru afişarea numelui cu majuscule de foloseşte \nfuncţia UPPER. \n \nSELECT empno, CONCAT(ename, job), ename, \nUPPER(ename) \nFROM EMP;  \nCurs 4 - BAZE DE DATE 26 \n4.2.1. Funcţii pentru şiruri de caractere']","## Funcția LENGTH în SQL
+
+**Funcția LENGTH** returnează lungimea unui șir de caractere, exprimată în numărul de caractere. 
+
+**De exemplu:**
+
+```sql
+SELECT LENGTH('Ana are mere'); -- Returnează 14
+```
+
+**Următoarele observații sunt importante:**
+
+* Funcția LENGTH numără caracterele, indiferent de tipul lor (litere, cifre, simboluri).
+* Lungimea Spațiilor este luată în considerare.
+* Rezultatul este un număr întreg.
+
+**Funcția LENGTH poate fi utilizată în diverse moduri:**
+
+* **În clauza WHERE:**
+
+```sql
+SELECT * FROM EMP WHERE LENGTH(ENAME) > 5; -- Selectează angajații cu numele mai lung de 5 caractere.
+```
+
+* **În clauza SELECT:**
+
+```sql
+SELECT empno, ename, LENGTH(ename) AS lungime_nume FROM EMP; -- Selectează numărul de angajat, numele și lungimea numelui.
+```
+
+* **În expresii complexe:**
+
+```sql
+SELECT LENGTH('ABC') + LENGTH('DEF') AS sum_lungime; -- Returnează suma lungimii șirurilor de caractere ""ABC"" și ""DEF"".
+```
+
+**Este important să rețineți că funcția LENGTH este sensibilă la majuscule și minuscule.** De exemplu, `LENGTH('Ana')` va fi diferit de `LENGTH('ana')`.
+
+Pentru mai multe informații despre funcția LENGTH, puteți consulta documentația MySQL sau alte resurse online.",Funcția LENGTH returnează numărul de caractere dintr-un șir de caractere.,0.9999999999,1.0,0.8487719747726548,0.2,0.11525449313283317,0.1134020618556701,0.4
+9,Cum se utilizează funcția CONCAT?,"['copyright@www.adrian.runceanu.ro \nFuncţii referitoare la o singură înregistrare \nFuncţiile referitoare la o singură înregistrare pot fi \nfolosite în: \n \na) clauza SELECT - pentru a modifica modul de \nafişare a datelor, pentru a realiza diferite calcule, \netc.', ""copyright@www.adrian.runceanu.ro \nLISTA SELECT \nExpresii concatenate: \n \nExemplu 5: \nSELECT 'Specializarea '|| NUME ||' are codul ', CODS \nFROM SPECIALIZARE; \n \n \nExemplu 6: \nCu valori nule: \nSELECT TIP , ' are valoarea ' || SUMA || '.Lei' \nFROM BURSA; \nCurs - Baze de date 16"", 'copyright@www.adrian.runceanu.ro \nFuncţii \nFuncţiile se pot clasifica în două categorii: \n \n1. Funcţii referitoare la o singură înregistrare \n(single-row functions) \n \n2. Funcţii referitoare la mai multe înregistrări \n(multiple-row functions) \nCurs 4 - BAZE DE DATE 8', ""cel de-al treilea argument al funcţiei.  \n  Am folosit acest artificiu deoarece şirul de caractere vid este \nechivalent cu valoarea Null, deci funcţia TRANSLATE (nume, 'A', ' \n') ar fi înlocuit toate valorile câmpului “nume” cu valoarea Null. \nCurs 4 - BAZE DE DATE 31"", 'copyright@www.adrian.runceanu.ro \nFuncţii \nFuncţiile se clasifică în două tipuri: \n \n1. Funcţii referitoare la o singură înregistrare \n(single-row functions) \n \n2. Funcţii referitoare la mai multe înregistrări \n(multiple-row functions) \nCurs 5 - BAZE DE DATE 8', 'copyright@www.adrian.runceanu.ro \nClauza WHERE \n  Clauza WHERE poate compara valori în coloană, \nvalori literale, expresii aritmetice sau funcţii. \nWHERE - restricţionează cererea la rândurile care \nîndeplinesc o condiţie; \n \nCondiţie este alcătuită din trei elemente: \n1. Un nume de coloană', 'Al doilea argument poate fi o valoare negativă, rotunjirea \nfăcându-se la stânga punctului zecimal.  \nCifra a |b|+1 din faţa punctului zecimal (numărând de la punctul \nzecimal spre stânga începând cu 1) va fi rotunjită în funcţie \ncifra aflată imediat la dreapta ei.', 'copyright@www.adrian.runceanu.ro \nSubcereri corelate  \n \n• O subinterogare corelata este o subinterogare \ncare se executa o data pentru fiecare linie \nconsiderata de interogarea principala si care la \nexecutie foloseste o valoare dintr-o coloana \ndin interogarea exterioara.', 'INITCAP(column|expression) \nconverteste prima litera a fiecarui cuvant in \ncaractere mari si restul cuvantului in caractere \nmici  \nCONCAT(column1|expression1, \ncolumn2|expression2) \nfunctia este echivalentul operatorului de \nconcantenare (||)', 'copyright@www.adrian.runceanu.ro \nFuncţii \n  O observaţie importanta este faptul că dacă se \napelează o funcţie SQL ce are un argument (parametru) \negal cu valoarea Null, atunci în mod automat rezultatul \nva avea valoarea Null.  \n  Singurele funcţii care nu respectă această regulă \nsunt:  \n– CONCAT']","## Cum se utilizează funcția CONCAT?
+
+Funcția CONCAT se folosește pentru a concatena (a uni) două sau mai multe șiruri de caractere. Este echivalentul operatorului de concatenare `||`. 
+
+**Sintaxa:**
+
+```sql
+CONCAT(column1|expression1, column2|expression2)
+```
+
+**Argumente:**
+
+* `column1|expression1`: Primul șir de caractere sau expresie.
+* `column2|expression2`: Al doilea șir de caractere sau expresie.
+
+**Returneaza:**
+
+Un șir de caractere care este rezultatul concatenarii argumentelor.
+
+**Exemple:**
+
+* **Exemplul 5:**
+
+```sql
+SELECT 'Specializarea '|| NUME ||' are codul ', CODS
+FROM SPECIALIZARE;
+```
+
+Acest script va afișa un șir de caractere de forma ""Specializarea X are codul Y"", unde X este numele specializării și Y este codul acesteia.
+
+* **Exemplul 6:**
+
+```sql
+SELECT TIP , ' are valoarea ' || SUMA || '.Lei'
+FROM BURSA;
+```
+
+Acest script va afișa un șir de caractere de forma ""Tipul X are valoarea Y.Lei"", unde X este tipul de bursă și Y este suma bursei.
+
+**Observații:**
+
+* Dacă unul dintre argumentele funcției este NULL, rezultatul va fi NULL.
+* Funcția CONCAT poate fi utilizată cu mai mult de două argumente.
+* Funcția CONCAT poate fi utilizată cu funcții care returnează șiruri de caractere.
+",Funcția CONCAT concatenează două sau mai multe șiruri de caractere într-unul singur.,0.11111111109999999,1.0,0.8996133518805225,0.7272727272727273,0.24343304284910328,0.11224489795918367,0.43

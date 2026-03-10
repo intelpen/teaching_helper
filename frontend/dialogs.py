@@ -1,4 +1,16 @@
+import os
+from pathlib import Path
+
 import streamlit as st
+from backend.admin_store import (
+    add_class,
+    delete_class,
+    get_classes,
+    get_users,
+    is_fixed_admin_email,
+    is_admin_user,
+    set_user_admin,
+)
 from backend.chatbot import start_dialog, respond_to_query
 from streamlit_pdf_viewer import pdf_viewer
 
@@ -91,11 +103,8 @@ from streamlit_pdf_viewer import pdf_viewer
 
 # incercare de functionalitate la Survey:
 
-import streamlit as st
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
-import os
-import base64
 
 
 # Generate and save the PDF
@@ -346,59 +355,180 @@ def generate_pdf(responses):
     return pdf_path
 
 
-def render_dialog(pdf_file):
-    left, right = st.columns([0.6, 0.4])  # Adjust column width to 60% / 40%
+def render_add_class_page():
+    st.title("Manage Classes")
+    st.write("Create a class, view all classes, and delete classes.")
+    pending_delete_class_id = st.session_state.get("pending_delete_class_id")
 
-    if st.session_state.get("connected", False):
-        if st.session_state.get("survey_active", False):
-            st.title("Feedback Survey")
-            render_survey()
-        elif st.session_state.get("mock_evaluation_1_active", False):
-            st.title("Mock Evaluation 1")
-            render_mock_evaluation(0)  # First set of questions
-        elif st.session_state.get("mock_evaluation_2_active", False):
-            st.title("Mock Evaluation 2")
-            render_mock_evaluation(1)  # Second set of questions
-        else:
-            # Left Zone: Display PDF or course content
-            with left:
-                if pdf_file:
-                    st.subheader(f"Content for {pdf_file}")
+    with st.form("add_class_form", clear_on_submit=True):
+        class_name = st.text_input("Class name")
+        uploaded_files = st.file_uploader(
+            "Upload class PDF files",
+            type=["pdf"],
+            accept_multiple_files=True,
+        )
+        submitted = st.form_submit_button("Create class")
+
+    if submitted:
+        try:
+            new_class = add_class(class_name, uploaded_files or [])
+            st.session_state["selected_class_name"] = new_class["name"]
+            st.success(f"Class '{new_class['name']}' was created.")
+            st.rerun()
+        except ValueError as err:
+            st.error(str(err))
+
+    existing_classes = get_classes()
+    if existing_classes:
+        class_ids = {class_obj["id"] for class_obj in existing_classes}
+        if pending_delete_class_id and pending_delete_class_id not in class_ids:
+            st.session_state.pop("pending_delete_class_id", None)
+            pending_delete_class_id = None
+
+        st.subheader("Existing classes")
+        st.caption("Default classes are protected and cannot be deleted.")
+
+        for class_obj in existing_classes:
+            class_id = class_obj["id"]
+            class_name = class_obj["name"]
+            pdf_count = len(class_obj.get("pdfs", []))
+            is_protected = class_id in {"sql"}
+            left, right = st.columns([0.8, 0.2])
+            left.write(f"**{class_name}** ({pdf_count} PDFs)")
+
+            if right.button(
+                "Delete",
+                key=f"delete_class_{class_id}",
+                use_container_width=True,
+                disabled=is_protected,
+                help="Default classes cannot be deleted." if is_protected else None,
+            ):
+                st.session_state["pending_delete_class_id"] = class_id
+                st.rerun()
+
+            if pending_delete_class_id == class_id:
+                st.warning(f"Are you sure you want to delete '{class_name}'?")
+                confirm_col, cancel_col = st.columns(2)
+
+                if confirm_col.button(
+                    "Confirm delete",
+                    key=f"confirm_delete_class_{class_id}",
+                    type="primary",
+                    use_container_width=True,
+                ):
                     try:
-                        pdf_viewer(st.session_state["pdf_file"])
-                        # pdf_viewer(st.session_state["pdf_file"])
-                        # with open(pdf_file, "rb") as pdf:
-                        #     pdf_data = pdf.read()
-                        #     st.download_button(
-                        #         label="Download PDF",
-                        #         data=pdf_data,
-                        #         file_name=pdf_file.split("/")[-1],
-                        #         mime="application/pdf",
-                        #     )
-                        #     st.markdown(
-                        #         f'<iframe src="data:application/pdf;base64,{base64.b64encode(pdf_data).decode()}" '
-                        #         f'width="100%" height="700px"></iframe>',
-                        #         unsafe_allow_html=True,
-                        #     )
+                        deleted_class = delete_class(class_id)
+                        if st.session_state.get("selected_class_name") == deleted_class.get("name"):
+                            st.session_state.pop("selected_class_name", None)
+                            st.session_state.pop("selected_class_id", None)
+                            st.session_state["pdf_file"] = None
+                        st.session_state.pop("pending_delete_class_id", None)
+                        st.success(f"Class '{deleted_class['name']}' was deleted.")
+                        st.rerun()
+                    except ValueError as err:
+                        st.error(str(err))
 
-                    except FileNotFoundError:
-                        st.error(
-                            "PDF file not found. Please check the file path.")
-                else:
-                    st.info(
-                        "No course selected. Please select a course from the sidebar.")
+                if cancel_col.button(
+                    "Cancel",
+                    key=f"cancel_delete_class_{class_id}",
+                    use_container_width=True,
+                ):
+                    st.session_state.pop("pending_delete_class_id", None)
+                    st.rerun()
 
-            # Right Zone: Chat Interface
-            with right:
-                st.subheader("Chat Interface")
-                dialog_type = st.selectbox("Select Dialog Type", [
-                                           "Learning", "Evaluation"], key="dialog_type")
-                user_input = st.text_input(
-                    "Ask a question or start the dialog:", key="user_input")
 
-                if user_input:
-                    response = respond_to_query(user_input, dialog_type)
-                    st.write(response)
+def render_manage_users_page():
+    st.title("Manage users")
+    st.write("Use the checkboxes to control admin access.")
+    st.caption("Some admin accounts are fixed and cannot be removed from admins.")
+
+    users = get_users()
+    with st.form("manage_users_form"):
+        admin_updates: dict[str, bool] = {}
+        for user in users:
+            email = user["email"]
+            display_name = user.get("name", "").strip()
+            is_fixed_admin = is_fixed_admin_email(email)
+            label = f"{display_name} ({email})" if display_name else email
+            admin_updates[email] = st.checkbox(
+                label,
+                value=bool(user.get("is_admin", False)),
+                key=f"is_admin_{email}",
+                disabled=is_fixed_admin,
+                help="This admin role is fixed." if is_fixed_admin else None,
+            )
+
+        saved = st.form_submit_button("Save changes")
+
+    if saved:
+        for email, is_admin in admin_updates.items():
+            set_user_admin(email, is_admin)
+        st.success("User roles were updated.")
+        st.rerun()
+
+
+def render_dialog(pdf_file):
+    if not st.session_state.get("connected", False):
+        return
+
+    active_page = st.session_state.get("active_page", "Learning")
+    user_email = st.session_state.get("user_info", {}).get("email", "")
+    admin_user = is_admin_user(user_email)
+
+    if active_page == "Feedback Survey":
+        st.title("Feedback Survey")
+        render_survey()
+        return
+
+    if active_page == "Mock Evaluation 1":
+        st.title("Mock Evaluation 1")
+        render_mock_evaluation(0)
+        return
+
+    if active_page == "Mock Evaluation 2":
+        st.title("Mock Evaluation 2")
+        render_mock_evaluation(1)
+        return
+
+    if active_page in {"Manage Classes", "Add a new Class"}:
+        if not admin_user:
+            st.error("Only admins can access this page.")
+            return
+        render_add_class_page()
+        return
+
+    if active_page == "Manage users":
+        if not admin_user:
+            st.error("Only admins can access this page.")
+            return
+        render_manage_users_page()
+        return
+
+    left, right = st.columns([0.6, 0.4])
+
+    with left:
+        selected_class_name = st.session_state.get("selected_class_name", "selected class")
+        if pdf_file:
+            st.subheader(f"Content for {selected_class_name}")
+            if Path(pdf_file).exists():
+                pdf_viewer(pdf_file)
+            else:
+                st.error("PDF file not found. Please check the file path.")
+        else:
+            st.info("No PDF selected. Please choose a class and a PDF from the sidebar.")
+
+    with right:
+        st.subheader("Chat Interface")
+        dialog_type = st.selectbox(
+            "Select Dialog Type",
+            ["Learning", "Evaluation"],
+            key="dialog_type",
+        )
+        user_input = st.text_input("Ask a question or start the dialog:", key="user_input")
+
+        if user_input:
+            response = respond_to_query(user_input, dialog_type)
+            st.write(response)
 
 # # Mock Query Response
 # def respond_to_query(query, dialog_type):
