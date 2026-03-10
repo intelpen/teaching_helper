@@ -192,3 +192,8 @@ include/
 
 # Local notebook with sensitive API keys
 tests/evaluate_rag.ipynb
+
+# Runtime admin/class management data
+data/classes.json
+data/users.json
+data/pdfs/classes/

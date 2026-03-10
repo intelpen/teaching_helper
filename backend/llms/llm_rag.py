@@ -25,7 +25,7 @@ class LLMRag(LLMProtocol, RagProtocol):
         self.name = 'LLMRag'
         if backend is None:
             # intitialize a default LLM
-            self.backend = LLMGemini(config)  # TODO: Change LLMDefault(config)
+            self.backend = LLMGemini()  # TODO: Change LLMDefault(config)
         else:
             self.backend = backend
 

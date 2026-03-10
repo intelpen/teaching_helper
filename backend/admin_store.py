@@ -1,5 +1,6 @@
 import json
 import re
+import shutil
 from pathlib import Path
 from typing import Any, Iterable
 
@@ -9,10 +10,15 @@ USERS_FILE = DATA_DIR / "users.json"
 CLASSES_FILE = DATA_DIR / "classes.json"
 CLASS_UPLOADS_DIR = DATA_DIR / "pdfs" / "classes"
 
-DEFAULT_ADMIN_EMAILS = {
+FIXED_ADMIN_EMAILS = {
     "adrian.balan@gmail.com",
+    "adrian.balan@airl.ro",
     "adrian.runceanu@gmail.com",
     "laviniu.gavanescu@gmail.com",
+}
+
+PROTECTED_CLASS_IDS = {
+    "sql",
 }
 
 
@@ -102,13 +108,15 @@ def _load_users() -> list[dict[str, Any]]:
             "is_admin": bool(raw_user.get("is_admin", False)),
         }
 
-    for admin_email in DEFAULT_ADMIN_EMAILS:
+    for admin_email in FIXED_ADMIN_EMAILS:
         if admin_email not in by_email:
             by_email[admin_email] = {
                 "email": admin_email,
                 "name": "",
                 "is_admin": True,
             }
+        else:
+            by_email[admin_email]["is_admin"] = True
 
     users = sorted(by_email.values(), key=lambda user: user["email"])
     _write_json(USERS_FILE, {"users": users})
@@ -128,15 +136,6 @@ def _load_classes() -> list[dict[str, Any]]:
                 "pdfs": _discover_default_sql_pdfs(),
             }
         )
-    if "computer science" not in class_names:
-        classes.append(
-            {
-                "id": _slugify("Computer Science"),
-                "name": "Computer Science",
-                "pdfs": [],
-            }
-        )
-
     classes = _sanitize_classes(classes)
     _write_json(CLASSES_FILE, {"classes": classes})
     return classes
@@ -170,7 +169,7 @@ def register_user(email: str | None, name: str | None = None) -> None:
         {
             "email": normalized_email,
             "name": (name or "").strip(),
-            "is_admin": False,
+            "is_admin": normalized_email in FIXED_ADMIN_EMAILS,
         }
     )
     _write_json(USERS_FILE, {"users": sorted(users, key=lambda item: item["email"])})
@@ -180,6 +179,9 @@ def set_user_admin(email: str, is_admin: bool) -> None:
     normalized_email = _normalize_email(email)
     if not normalized_email:
         return
+
+    if normalized_email in FIXED_ADMIN_EMAILS:
+        is_admin = True
 
     users = _load_users()
     updated = False
@@ -199,6 +201,10 @@ def set_user_admin(email: str, is_admin: bool) -> None:
         )
 
     _write_json(USERS_FILE, {"users": sorted(users, key=lambda item: item["email"])})
+
+
+def is_fixed_admin_email(email: str | None) -> bool:
+    return _normalize_email(email) in FIXED_ADMIN_EMAILS
 
 
 def is_admin_user(email: str | None) -> bool:
@@ -267,3 +273,26 @@ def add_class(class_name: str, uploaded_files: Iterable[Any]) -> dict[str, Any]:
     classes.append(new_class)
     _write_json(CLASSES_FILE, {"classes": _sanitize_classes(classes)})
     return new_class
+
+
+def delete_class(class_id: str) -> dict[str, Any]:
+    target_class_id = (class_id or "").strip()
+    if not target_class_id:
+        raise ValueError("Class id is required.")
+
+    if target_class_id in PROTECTED_CLASS_IDS:
+        raise ValueError("This default class cannot be deleted.")
+
+    classes = _load_classes()
+    target_class = next((class_obj for class_obj in classes if class_obj["id"] == target_class_id), None)
+    if target_class is None:
+        raise ValueError("Class not found.")
+
+    remaining_classes = [class_obj for class_obj in classes if class_obj["id"] != target_class_id]
+    _write_json(CLASSES_FILE, {"classes": _sanitize_classes(remaining_classes)})
+
+    class_folder = CLASS_UPLOADS_DIR / target_class_id
+    if class_folder.exists():
+        shutil.rmtree(class_folder, ignore_errors=True)
+
+    return target_class

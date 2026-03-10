@@ -2,7 +2,15 @@ import os
 from pathlib import Path
 
 import streamlit as st
-from backend.admin_store import add_class, get_classes, get_users, is_admin_user, set_user_admin
+from backend.admin_store import (
+    add_class,
+    delete_class,
+    get_classes,
+    get_users,
+    is_fixed_admin_email,
+    is_admin_user,
+    set_user_admin,
+)
 from backend.chatbot import start_dialog, respond_to_query
 from streamlit_pdf_viewer import pdf_viewer
 
@@ -348,8 +356,9 @@ def generate_pdf(responses):
 
 
 def render_add_class_page():
-    st.title("Add a new Class")
-    st.write("Create a class and optionally upload one or more PDF files.")
+    st.title("Manage Classes")
+    st.write("Create a class, view all classes, and delete classes.")
+    pending_delete_class_id = st.session_state.get("pending_delete_class_id")
 
     with st.form("add_class_form", clear_on_submit=True):
         class_name = st.text_input("Class name")
@@ -371,14 +380,67 @@ def render_add_class_page():
 
     existing_classes = get_classes()
     if existing_classes:
+        class_ids = {class_obj["id"] for class_obj in existing_classes}
+        if pending_delete_class_id and pending_delete_class_id not in class_ids:
+            st.session_state.pop("pending_delete_class_id", None)
+            pending_delete_class_id = None
+
         st.subheader("Existing classes")
+        st.caption("Default classes are protected and cannot be deleted.")
+
         for class_obj in existing_classes:
-            st.write(f"- {class_obj['name']} ({len(class_obj.get('pdfs', []))} PDFs)")
+            class_id = class_obj["id"]
+            class_name = class_obj["name"]
+            pdf_count = len(class_obj.get("pdfs", []))
+            is_protected = class_id in {"sql"}
+            left, right = st.columns([0.8, 0.2])
+            left.write(f"**{class_name}** ({pdf_count} PDFs)")
+
+            if right.button(
+                "Delete",
+                key=f"delete_class_{class_id}",
+                use_container_width=True,
+                disabled=is_protected,
+                help="Default classes cannot be deleted." if is_protected else None,
+            ):
+                st.session_state["pending_delete_class_id"] = class_id
+                st.rerun()
+
+            if pending_delete_class_id == class_id:
+                st.warning(f"Are you sure you want to delete '{class_name}'?")
+                confirm_col, cancel_col = st.columns(2)
+
+                if confirm_col.button(
+                    "Confirm delete",
+                    key=f"confirm_delete_class_{class_id}",
+                    type="primary",
+                    use_container_width=True,
+                ):
+                    try:
+                        deleted_class = delete_class(class_id)
+                        if st.session_state.get("selected_class_name") == deleted_class.get("name"):
+                            st.session_state.pop("selected_class_name", None)
+                            st.session_state.pop("selected_class_id", None)
+                            st.session_state["pdf_file"] = None
+                        st.session_state.pop("pending_delete_class_id", None)
+                        st.success(f"Class '{deleted_class['name']}' was deleted.")
+                        st.rerun()
+                    except ValueError as err:
+                        st.error(str(err))
+
+                if cancel_col.button(
+                    "Cancel",
+                    key=f"cancel_delete_class_{class_id}",
+                    use_container_width=True,
+                ):
+                    st.session_state.pop("pending_delete_class_id", None)
+                    st.rerun()
 
 
 def render_manage_users_page():
     st.title("Manage users")
     st.write("Use the checkboxes to control admin access.")
+    st.caption("Some admin accounts are fixed and cannot be removed from admins.")
 
     users = get_users()
     with st.form("manage_users_form"):
@@ -386,11 +448,14 @@ def render_manage_users_page():
         for user in users:
             email = user["email"]
             display_name = user.get("name", "").strip()
+            is_fixed_admin = is_fixed_admin_email(email)
             label = f"{display_name} ({email})" if display_name else email
             admin_updates[email] = st.checkbox(
                 label,
                 value=bool(user.get("is_admin", False)),
                 key=f"is_admin_{email}",
+                disabled=is_fixed_admin,
+                help="This admin role is fixed." if is_fixed_admin else None,
             )
 
         saved = st.form_submit_button("Save changes")
@@ -425,7 +490,7 @@ def render_dialog(pdf_file):
         render_mock_evaluation(1)
         return
 
-    if active_page == "Add a new Class":
+    if active_page in {"Manage Classes", "Add a new Class"}:
         if not admin_user:
             st.error("Only admins can access this page.")
             return
